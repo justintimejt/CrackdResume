@@ -22,9 +22,7 @@ type Education = {
     location: string;
 }
 
-type Skills = {
-    description: string;
-}
+type Skills = string[];
 
 //experience
 type Experience = {
@@ -59,6 +57,15 @@ const Form = () => {
 
     {/* Handle Form Changes*/}
 
+    //handle education section
+    const [education, setEducation] = useState<Education[]>([
+        { school: '', degree: '', startyear: '', endyear: '',location: ''}
+    ]);
+
+    const [skills, setSkills] = useState<Skills>([]);
+
+    const [skillInput, setSkillInput] = useState<string> ('');
+
     //handle experience section
     const [experiences, setExperiences] = useState<Experience[]>([
         { title: '', company: '', location: '', startdate: '', enddate: '', description: '' }
@@ -82,7 +89,50 @@ const Form = () => {
         }));
     };
 
-    {/*handle all experience actions*/}
+
+    //handle change in education block
+    const handleEducationChange = (
+        index: number,
+        field: keyof Education,
+        value: string
+    ) => {
+        const updated = [...education];
+        updated[index][field] = value;
+        setEducation(updated);
+    }
+
+    const addEducation = () => {
+        setEducation([
+            ...education,
+            { school: '', degree: '', startyear: '', endyear: '',location: ''}
+        ]);
+    };
+
+    const deleteEducation = (index: number) => {
+        setEducation(education.filter((_, i) => i !== index));
+    };
+
+    const handleSkillInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSkillInput(e.target.value);
+    };
+
+    const addSkill = () => {
+        const trimmed = skillInput.trim();
+        if (!trimmed) return;
+        setSkills([...skills, trimmed]);
+        setSkillInput('');
+    }
+
+    const deleteSkill = (index: number) => {
+        setSkills(skills.filter((_, i) => i !== index));
+    };
+
+    const handleSkillKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            addSkill();
+        }
+    };
 
     //handle changes in experience blocks
     const handleExperienceChange = (
@@ -174,6 +224,8 @@ const Form = () => {
         e.preventDefault(); //prevent default form submission
         const completeForm = {
             ...formData, //unpack form data
+            education,
+            skills,
             experiences,
             projects
         };
@@ -186,63 +238,169 @@ const Form = () => {
 
     //render jsx
     return (
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 mx-auto max-w-2xl">
 
-        {/* Personal Info Card */}
-    <div className="border p-6 rounded bg-white shadow">
-        <h2 className="text-xl font-semibold mb-4">
-            Personal Information
-        </h2>
-        <input
-            type="text"
-            name="firstname"
-            placeholder="First Name"
-            value={formData.firstname}
-            onChange={handleChange}
-            className="border p-2 w-full mb-2"
-        />
-        <input
-            type="text"
-            name="lastname"
-            placeholder="Last Name"
-            value={formData.lastname}
-            onChange={handleChange}
-            className="border p-2 w-full mb-2"
-        />
-        <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            className="border p-2 w-full mb-2"
-        />
-        <input
-            type="text"
-            name="phonenumber"
-            placeholder="Phone Number"
-            value={formData.phonenumber}
-            onChange={handleChange}
-            className="border p-2 w-full mb-2"
-        />
-        <input
-            type="text"
-            name="linkedin"
-            placeholder="LinkedIn"
-            value={formData.linkedin}
-            onChange={handleChange}
-            className="border p-2 w-full mb-2"
-        />
-        <input
-            type="text"
-            name="website"
-            placeholder="Website"
-            value={formData.website}
-            onChange={handleChange}
-            className="border p-2 w-full"
-        />
-    </div>
+            {/* Personal Info Card */}
+            <div className="border p-6 rounded bg-white shadow">
+                <h2 className="text-xl font-semibold mb-4">
+                    Personal Information
+                </h2>
+                <input
+                    type="text"
+                    name="firstname"
+                    placeholder="First Name"
+                    value={formData.firstname}
+                    onChange={handleChange}
+                    className="border p-2 w-full mb-2"
+                />
+                <input
+                    type="text"
+                    name="lastname"
+                    placeholder="Last Name"
+                    value={formData.lastname}
+                    onChange={handleChange}
+                    className="border p-2 w-full mb-2"
+                />
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="border p-2 w-full mb-2"
+                />
+                <input
+                    type="text"
+                    name="phonenumber"
+                    placeholder="Phone Number"
+                    value={formData.phonenumber}
+                    onChange={handleChange}
+                    className="border p-2 w-full mb-2"
+                />
+                <input
+                    type="text"
+                    name="linkedin"
+                    placeholder="LinkedIn"
+                    value={formData.linkedin}
+                    onChange={handleChange}
+                    className="border p-2 w-full mb-2"
+                />
+                <input
+                    type="text"
+                    name="website"
+                    placeholder="Website"
+                    value={formData.website}
+                    onChange={handleChange}
+                    className="border p-2 w-full"
+                />
+            </div>
 
+            {/* Education and Skills Side by Side */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {/* Education Section */}
+                <div className="space-y-4">
+                    <h2 className="text-lg font-semibold">Education</h2>
+                    {education.map((edu, eduIndex) => (
+                        <div key={eduIndex} className="space-y-2 border p-4 rounded bg-gray-50 relative">
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    deleteEducation(eduIndex)
+                                }}
+                                className="absolute top-2 right-2 bg-red-100 text-red-600 rounded-full w-6 h-6 flex items-center justify-center shadow"
+                            >
+                                ×
+                            </button>
+                            <input
+                                type="text"
+                                placeholder="School"
+                                value={edu.school}
+                                onChange={(e) => handleEducationChange(eduIndex, 'school', e.target.value)}
+                                className="border p-2 w-full"
+                            />
+                            <input
+                                type="text"
+                                placeholder="Degree"
+                                value={edu.degree}
+                                onChange={(e) => handleEducationChange(eduIndex, 'degree', e.target.value)}
+                                className="border p-2 w-full"
+                            />
+                            <label className="text-sm font-medium text-gray-700">
+                                Start Year
+                            </label>
+                            <input
+                                type="date"
+                                placeholder=""
+                                value={edu.startyear}
+                                onChange={(e) => handleEducationChange(eduIndex, 'startyear', e.target.value)}
+                                className="border p-2 w-full"
+                            />
+                            <label className="text-sm font-medium text-gray-700">
+                                End Year
+                            </label>
+                            <input
+                                type="date"
+                                placeholder=""
+                                value={edu.endyear}
+                                onChange={(e) => handleEducationChange(eduIndex, 'endyear', e.target.value)}
+                                className="border p-2 w-full"
+                            />
+                            <textarea
+                                placeholder="Location"
+                                value={edu.location}
+                                onChange={(e) => handleEducationChange(eduIndex, 'location', e.target.value)}
+                                className="border p-2 w-full"
+                            />
+                        </div>
+                    ))}
+                    <button type="button" onClick={addEducation} className="mt-2 bg-green-500 text-white px-4 py-2 rounded">+ Add Education</button>
+                </div>
+
+                {/* Skills Section */}
+                <div className="space-y-4">
+                    <h2 className="text-lg font-semibold">Skills</h2>
+                
+                    {/* Skill input + add button */}
+                        <div className="flex items-center gap-2">
+                            <input
+                                type="text"
+                                placeholder="Add a skill (press Enter)"
+                                value={skillInput}
+                                onChange={handleSkillInputChange}
+                                onKeyDown={handleSkillKeyDown}
+                                className="border p-2 w-full appearance-none"
+                            />
+                            <button
+                                type="button"
+                                onClick={addSkill}
+                                className="bg-green-500 text-white px-4 py-2 rounded"
+                            >
+                                Add
+                            </button>
+                        </div>
+
+                    {/* List of added skills */}
+                    <div className="flex flex-wrap gap-2">
+                        {skills.map((skill, index) => (
+                            <span
+                                key={index}
+                                className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full flex items-center gap-2"
+                            >
+                                {skill}
+                            <button
+                                type="button"
+                                onClick={() => deleteSkill(index)}
+                                className="text-red-500 font-bold hover:text-red-700"
+                            >
+                                ×
+                            </button>
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            
             {/* Experience and Projects Side by Side */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Experience Section */}
@@ -253,8 +411,7 @@ const Form = () => {
                             <button
                                 type="button"
                                 onClick={() => {
-                                    const updated = experiences.filter((_, i) => i !== expIndex);
-                                    setExperiences(updated);
+                                    deleteExperience(expIndex)
                                 }}
                                 className="absolute top-2 right-2 bg-red-100 text-red-600 rounded-full w-6 h-6 flex items-center justify-center shadow"
                             >
@@ -320,8 +477,7 @@ const Form = () => {
                             <button
                                 type="button"
                                 onClick={() => {
-                                    const updated = projects.filter((_, i) => i !== projIndex);
-                                    setProjects(updated);
+                                    deleteProject(projIndex)
                                     setTechInputs((prev) => prev.filter((_, i) => i !== projIndex));
                                 }}
                                 className="absolute top-2 right-2 bg-red-100 text-red-600 rounded-full w-6 h-6 flex items-center justify-center shadow"
@@ -364,7 +520,7 @@ const Form = () => {
                             <div className="flex gap-2">
                                 <input
                                     type="text"
-                                    placeholder="Add Technology"
+                                    placeholder="Add Technology (press Enter)"
                                     value={techInputs[projIndex]}
                                     onChange={(e) => handleTechInputChange(projIndex, e.target.value)}
                                     onKeyDown={(e) => handleTechKeyDown(e, projIndex)}
@@ -411,8 +567,6 @@ const Form = () => {
             >
             Submit
             </button>
-
-
         </form>   
     );
 };
