@@ -238,7 +238,7 @@ const Form = () => {
 
     //render jsx
     return (
-        <form onSubmit={handleSubmit} className="space-y-4 mx-auto max-w-2xl">
+        <form onSubmit={handleSubmit} className="space-y-4 mx-auto max-w-3xl border rounded-xl p-10 bg-gray-200">
 
             {/* Personal Info Card */}
             <div className="border p-6 rounded bg-white shadow">
@@ -280,7 +280,7 @@ const Form = () => {
                 <input
                     type="text"
                     name="linkedin"
-                    placeholder="LinkedIn"
+                    placeholder="LinkedIn (optional)"
                     value={formData.linkedin}
                     onChange={handleChange}
                     className="border p-2 w-full mb-2"
@@ -288,7 +288,7 @@ const Form = () => {
                 <input
                     type="text"
                     name="website"
-                    placeholder="Website"
+                    placeholder="Website (optional)"
                     value={formData.website}
                     onChange={handleChange}
                     className="border p-2 w-full"
@@ -368,7 +368,7 @@ const Form = () => {
                                 value={skillInput}
                                 onChange={handleSkillInputChange}
                                 onKeyDown={handleSkillKeyDown}
-                                className="border p-2 w-full appearance-none"
+                                className="border p-2 w-full appearance-none bg-white"
                             />
                             <button
                                 type="button"
@@ -384,7 +384,7 @@ const Form = () => {
                         {skills.map((skill, index) => (
                             <span
                                 key={index}
-                                className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full flex items-center gap-2"
+                                className="bg-gray-300 text-gray-800 px-3 py-1 rounded-full flex items-center gap-2"
                             >
                                 {skill}
                             <button
