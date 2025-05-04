@@ -2,47 +2,60 @@
 
 import React from 'react';
 import { useState } from 'react';
+import { FaArrowRight } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
 
 const TemplateSelector = () => {
+
+    const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
+    const templates = [
+        { name: "Jake's Resume", image: "/assets/images/jakes-resume.png" },
+        { name: "Modern CV", image: "/assets/images/jakes-resume.png" },
+        { name: "Awesome CV", image: "/assets/images/jakes-resume.png" },
+    ]
+
     return (
-        <div className="w-2/3 mx-auto">
-            <h1 className="pb-5">Choose Resume Template:</h1>
-            <div className="grid grid-cols-3 grid-rows-2 gap-4">
 
-                <button className ="border rounded-md p-10 max-w-xl">
-                    <img src="/assets/images/jakes-resume.png" alt="Jakes Resume" />
-                    <h2>Jake's Resume</h2>
-                </button>
+        <div className="mx-auto">
+            <h1 className="pb-5 text-xl font-semibold">Choose Resume Template:</h1>
 
-                <button className ="border rounded-md p-10 max-w-xl">
-                    <img src="/assets/images/jakes-resume.png" alt="Jakes Resume" />
-                    <h2>Jake's Resume</h2>
-                </button>
+            {/*Template Options*/}
+            <div className="grid grid-cols-3 gap-10">
+                {templates.map((template, index) => (
+                    <button 
+                        key={index}
+                        onClick={() => setSelectedIndex(index)}
+                        className={`border border-amber-50 rounded-md shadow-lg bg-gray-100 p-6 transition transform hover:scale-105 duration-150 flex flex-col items-center gap-2 ${
+                            selectedIndex === index
+                                ? "ring-2 ring-blue-500 bg-blue-50"
+                                : "hover:ring-1 hover:ring-blue-500"
+                        }`}
+                    >
+                        <img src={template.image} alt={template.name} className="object-contain" />
+                        <h2 className="text-center font-medium">{template.name}</h2>
+                    </button>
+                ))}
+              </div>
 
-                <button className ="border rounded-md p-10 max-w-xl">
-                    <img src="/assets/images/jakes-resume.png" alt="Jakes Resume" />
-                    <h2>Jake's Resume</h2>
-                </button>
-
-                <button className ="border rounded-md p-10 max-w-xl">
-                    <img src="/assets/images/jakes-resume.png" alt="Jakes Resume" />
-                    <h2>Jake's Resume</h2>
-                </button>
-
-                <button className ="border rounded-md p-10 max-w-xl">
-                    <img src="/assets/images/jakes-resume.png" alt="Jakes Resume" />
-                    <h2>Jake's Resume</h2>
-                </button>
-
-                <button className ="border rounded-md p-10 max-w-xl">
-                    <img src="/assets/images/jakes-resume.png" alt="Jakes Resume" />
-                    <h2>Jake's Resume</h2>
-                </button>
-            </div>
-            
+            {/*Navigation Buttons*/}
             <div className="flex justify-between pt-6">
-                <button className="border rounded-lg px-4 py-2">Back to Home</button>
-                <button className="border rounded-lg px-4 py-2">Next</button>
+                <button className="border rounded-lg px-4 py-2 flex items-center gap-2 hover:bg-blue-500 hover:text-white transition transform hover:scale-105">
+                    <FaArrowLeft />
+                    Back to Home
+                </button>
+
+                <button
+                    disabled={selectedIndex === null}
+                    className={`border rounded-lg px-4 py-2 flex items-center gap-2 ${
+                        selectedIndex === null
+                        ? "opacity-50 cursor-not-allowed"
+                        : "hover:bg-blue-500 hover:text-white transition transform hover:scale-105"
+                    }`}
+                >
+                    Next
+                    <FaArrowRight />
+                </button>
             </div>
         </div>
     );
