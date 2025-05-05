@@ -19,7 +19,7 @@ const TemplateSelector = ({ onSelect }: Props) => {
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
     const templates: Template[] = [
-        { name: "Jake's Resume", image: "/assets/images/jakes-resume.png" },
+        { name: "Jake Ryan's Overleaf Resume", image: "/assets/images/jakes-resume.png" },
         { name: "Modern CV", image: "/assets/images/jakes-resume.png" },
         { name: "Awesome CV", image: "/assets/images/jakes-resume.png" },
     ];
