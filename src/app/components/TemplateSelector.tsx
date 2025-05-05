@@ -5,15 +5,30 @@ import { useState } from 'react';
 import { FaArrowRight } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
 
-const TemplateSelector = () => {
+type Template = {
+    name: string;
+    image: string;
+}
+
+type Props = {
+    onSelect: (template: Template) => void;
+};
+
+const TemplateSelector = ({ onSelect }: Props) => {
 
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-    const templates = [
+    const templates: Template[] = [
         { name: "Jake's Resume", image: "/assets/images/jakes-resume.png" },
         { name: "Modern CV", image: "/assets/images/jakes-resume.png" },
         { name: "Awesome CV", image: "/assets/images/jakes-resume.png" },
-    ]
+    ];
+
+    const handleNext = () => {
+        if (selectedIndex !== null) {
+            onSelect(templates[selectedIndex]);
+        }
+    };
 
     return (
 
@@ -46,6 +61,7 @@ const TemplateSelector = () => {
                 </button>
 
                 <button
+                    onClick={handleNext}
                     disabled={selectedIndex === null}
                     className={`border rounded-lg px-4 py-2 flex items-center gap-2 ${
                         selectedIndex === null

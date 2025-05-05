@@ -43,7 +43,14 @@ type Project = {
     description: string;
 }
 
-const Form = () => {
+type Props = {
+    selectedTemplate: {
+        name: string;
+        image: string;
+    };
+};  
+
+const Form = ({ selectedTemplate }: Props) => {
 
     //useState hook to track form field values
     const [formData, setFormData] = useState<PersonalInfo>({
@@ -218,20 +225,45 @@ const Form = () => {
     };
 
     {/* Handle Submission*/}
+    const [latexOutput, setLatexOutput] = useState('');
+    
 
     //handle form submission
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault(); //prevent default form submission
+
         const completeForm = {
             ...formData, //unpack form data
             education,
             skills,
             experiences,
-            projects
+            projects,
+            template: selectedTemplate.name,
         };
 
-        //debug: log submitted form data
-        console.log("data", formData, experiences, projects); 
+
+        //send POST request to backend
+        try {
+            const response = await fetch("/api/generate", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify ({
+                    template: selectedTemplate,
+                    formData: completeForm,
+                })
+            });
+
+        
+            const data = await response.json();
+            console.log("LaTeX output:", data.latex);
+
+            setLatexOutput(data.latex);
+
+        } catch (error) {
+            console.error("Error sending data:", error);
+        }
 
         //TODO: SEND FORM DATA TO BACKEND/GEMINI API
     };
