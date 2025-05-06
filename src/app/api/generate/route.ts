@@ -11,60 +11,129 @@ export async function POST(req: Request) {
         const prompt = `
             Instructions: Use the ${template} LaTeX template
             Follow the format of this template on overleaf: https://www.overleaf.com/latex/templates/jakes-resume/syzfjbzwjncs
-            Formatting Rules
-            Use \\documentclass{article}.
+            
+            You are an expert LaTeX resume builder. Using the provided JSON data, generate a resume that replicates Jake Gutierrez's Overleaf resume template EXACTLY in terms of structure, formatting, and LaTeX code. Use ONLY LaTeX.
 
-            Do not include section numbering. Use \\section*{} for all section headers.
+Reference Template: https://www.overleaf.com/latex/templates/jakes-resume/syzfjbzwjncs
 
-            Use professional fonts only: recommend \\usepackage{times}, palatino, or similar.
+%-------------------------
+% DOCUMENT SETUP (use exactly)
+%-------------------------
+\\documentclass[letterpaper,11pt]{article}
+\\usepackage{latexsym}
+\\usepackage[empty]{fullpage}
+\\usepackage{titlesec}
+\\usepackage{marvosym}
+\\usepackage[usenames,dvipsnames]{color}
+\\usepackage{verbatim}
+\\usepackage{enumitem}
+\\usepackage[hidelinks]{hyperref}
+\\usepackage{fancyhdr}
+\\usepackage[english]{babel}
+\\usepackage{tabularx}
+\\input{glyphtounicode}
 
-            Keep the layout compact and within 1 page only.
+\\pagestyle{fancy}
+\\fancyhf{}
+\\fancyfoot{}
+\\renewcommand{\\headrulewidth}{0pt}
+\\renewcommand{\\footrulewidth}{0pt}
 
-            Header
-            Centered at the top: Full Name in large bold font (e.g., \\Huge \\textbf{Jake Ryan}).
+% Adjust margins
+\\addtolength{\\oddsidemargin}{-0.5in}
+\\addtolength{\\evensidemargin}{-0.5in}
+\\addtolength{\\textwidth}{1in}
+\\addtolength{\\topmargin}{-.5in}
+\\addtolength{\\textheight}{1.0in}
 
-            Below that, add one line of contact info:
+\\urlstyle{same}
+\\raggedbottom
+\\raggedright
+\\setlength{\\tabcolsep}{0in}
 
-            Phone \\textbar{} Email \\textbar{} LinkedIn \\textbar{} GitHub
+% Section formatting
+\\titleformat{\\section}{\\vspace{-4pt}\\scshape\\raggedright\\large}{}{0em}{}[\\color{black}\\titlerule \\vspace{-5pt}]
 
-            Education
-            \\section*{Education}
+\\pdfgentounicode=1
 
-            For each entry:
+% Custom commands
+\\newcommand{\\resumeItem}[1]{\\item\\small{#1 \\vspace{-2pt}}}
+\\newcommand{\\resumeSubheading}[4]{\\vspace{-2pt}\\item \\begin{tabular*}{0.97\\textwidth}[t]{l@{\\extracolsep{\\fill}}r} \\textbf{#1} & #2 \\\\ \\textit{\\small#3} & \\textit{\\small #4} \\end{tabular*}\\vspace{-7pt}}
+\\newcommand{\\resumeProjectHeading}[2]{\\item \\begin{tabular*}{0.97\\textwidth}{l@{\\extracolsep{\\fill}}r} \\small#1 & #2 \\end{tabular*}\\vspace{-7pt}}
+\\newcommand{\\resumeItemListStart}{\\begin{itemize}}
+\\newcommand{\\resumeItemListEnd}{\\end{itemize}\\vspace{-5pt}}
+\\newcommand{\\resumeSubHeadingListStart}{\\begin{itemize}[leftmargin=0.15in, label={}]}
+\\newcommand{\\resumeSubHeadingListEnd}{\\end{itemize}}
 
-            \\textbf{University Name} on the left
+%-------------------------
+% RESUME STARTS HERE
+%-------------------------
 
-            Italic degree title
+\\begin{document}
 
-            Location and date on the right using \\hfill or \\begin{flushright}
+%----------HEADING----------
+\\begin{center}
+    \\textbf{\\Huge \\scshape Jake Ryan} \\\\ \\vspace{1pt}
+    \\small 123-456-7890 $|$ \\href{mailto:x@x.com}{\\underline{jake@su.edu}} $|$
+    \\href{https://linkedin.com/in/...}{\\underline{linkedin.com/in/jake}} $|$
+    \\href{https://github.com/...}{\\underline{github.com/jake}}
+\\end{center}
 
-            Experience
-            \\section*{Experience}
+%-----------EDUCATION-----------
+\\section{Education}
+\\resumeSubHeadingListStart
+  \\resumeSubheading{Southwestern University}{Georgetown, TX}{Bachelor of Arts in Computer Science, Minor in Business}{Aug. 2018 -- May 2021}
+  \\resumeSubheading{Blinn College}{Bryan, TX}{Associate's in Liberal Arts}{Aug. 2014 -- May 2018}
+\\resumeSubHeadingListEnd
 
-            Bold job title left, date right
+%-----------EXPERIENCE-----------
+\\section{Experience}
+\\resumeSubHeadingListStart
+  \\resumeSubheading{Undergraduate Research Assistant}{June 2020 -- Present}{Texas A\\&M University}{College Station, TX}
+  \\resumeItemListStart
+    \\resumeItem{Developed a REST API using FastAPI and PostgreSQL to store data from learning management systems}
+    \\resumeItem{Built a web app using Flask, React, PostgreSQL, and Docker}
+  \\resumeItemListEnd
 
-            Italic company name
+  \\resumeSubheading{IT Support Specialist}{Sep. 2018 -- Present}{Southwestern University}{Georgetown, TX}
+  \\resumeItemListStart
+    \\resumeItem{Set up and maintained 200+ devices campus-wide}
+    \\resumeItem{Provided Tier-1 troubleshooting for faculty and students}
+  \\resumeItemListEnd
+\\resumeSubHeadingListEnd
 
-            Bullet points using:
+%-----------PROJECTS-----------
+\\section{Projects}
+\\resumeSubHeadingListStart
+  \\resumeProjectHeading{\\textbf{Gitlytics} $|$ \\emph{Python, Flask, React}}{June 2020 -- Present}
+  \\resumeItemListStart
+    \\resumeItem{Visualized GitHub data to analyze team collaboration}
+    \\resumeItem{Built using Docker, PostgreSQL, Celery, and Redis}
+  \\resumeItemListEnd
 
-            latex
-            Copy code
-            \\begin{itemize}
-            \\item ...
-            \\item ...
-            \\end{itemize}
+  \\resumeProjectHeading{\\textbf{Simple Paintball} $|$ \\emph{Spigot API, Java}}{May 2018 -- May 2020}
+  \\resumeItemListStart
+    \\resumeItem{Created a Minecraft plugin downloaded 2K+ times}
+  \\resumeItemListEnd
+\\resumeSubHeadingListEnd
 
-            Projects
-            \\section*{Projects}
+%-----------SKILLS-----------
+\\section{Technical Skills}
+\\begin{itemize}[leftmargin=0.15in, label={}]
+  \\small{\\item{
+    \\textbf{Languages}{: Java, Python, C/C++, JavaScript, SQL, HTML/CSS} \\\\ 
+    \\textbf{Frameworks}{: React, Node.js, Flask, JUnit, Material-UI} \\\\ 
+    \\textbf{Tools}{: Git, Docker, VS Code, Google Cloud, IntelliJ} \\\\ 
+    \\textbf{Libraries}{: pandas, NumPy, Matplotlib}
+  }}
+\\end{itemize}
 
-            Bold project name, italic tech stack
+\\end{document}
 
-            Bullet points with features or accomplishments
-
-            Technical Skills
-            \\section*{Technical Skills}
-
-            Bold category headers: \\textbf{Languages:} followed by  "|" and then comma-separated values
+🧾 INSTRUCTIONS TO GEMINI:
+- DO NOT OMIT ANY OF THE ABOVE STRUCTURE.
+- DO NOT GENERATE ANY NON-LATEX TEXT.
+- EVERY SECTION MUST MIRROR THE EXAMPLES ABOVE EXACTLY.
 
             Output: generate a resume based on the following user data:
             \n\n${JSON.stringify(
