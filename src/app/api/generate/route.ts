@@ -134,6 +134,7 @@ export async function POST(req: Request) {
             - DO NOT OMIT ANY OF THE ABOVE STRUCTURE.
             - DO NOT GENERATE ANY NON-LATEX TEXT.
             - EVERY SECTION MUST MIRROR THE EXAMPLES ABOVE EXACTLY.
+            - IF THE INPUT INCLUDES ANY DOT JOTS, REMOVE THEM
 
             Output: generate a resume based on the following user data:
             \n\n${JSON.stringify(
