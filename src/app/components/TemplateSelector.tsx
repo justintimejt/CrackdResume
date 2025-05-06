@@ -22,7 +22,7 @@ const TemplateSelector = ({ onSelect }: Props) => {
 
     const templates: Template[] = [
         {
-          name: "Jake Resume",
+          name: "Jake's Resume",
           image: "/assets/images/jakes-resume.png",
           prompt: templatePrompts["Jake's Resume"]
         },
@@ -34,7 +34,7 @@ const TemplateSelector = ({ onSelect }: Props) => {
         {
           name: "SWE Resume",
           image: "/assets/images/jakes-resume.png",
-          prompt: templatePrompts["Software Engineer Resume"]
+          prompt: templatePrompts["SWE Resume"]
         },
       ];
 

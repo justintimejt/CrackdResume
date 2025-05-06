@@ -250,7 +250,7 @@ const Form = ({ selectedTemplate }: Props) => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify ({
-                    template: selectedTemplate,
+                    template: selectedTemplate.name,
                     formData: completeForm,
                 })
             });

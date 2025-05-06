@@ -27,6 +27,7 @@ export async function POST(req: Request) {
       
         const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
 
+        console.log(prompt); //debug
         const result = await model.generateContent(prompt);
         const response = await result.response;
         const latex = await response.text();
