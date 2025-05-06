@@ -4,10 +4,12 @@ import React from 'react';
 import { useState } from 'react';
 import { FaArrowRight } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
+import { templatePrompts } from "../constants/templatePrompts";
 
 type Template = {
     name: string;
     image: string;
+    prompt: string;
 }
 
 type Props = {
@@ -19,10 +21,22 @@ const TemplateSelector = ({ onSelect }: Props) => {
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
     const templates: Template[] = [
-        { name: "Jake Ryan's Overleaf Resume", image: "/assets/images/jakes-resume.png" },
-        { name: "Modern CV", image: "/assets/images/jakes-resume.png" },
-        { name: "Awesome CV", image: "/assets/images/jakes-resume.png" },
-    ];
+        {
+          name: "Jake Resume",
+          image: "/assets/images/jakes-resume.png",
+          prompt: templatePrompts["Jake's Resume"]
+        },
+        {
+          name: "Modern Deedy",
+          image: "/assets/images/jakes-resume.png",
+          prompt: templatePrompts["Modern Deedy"]
+        },
+        {
+          name: "SWE Resume",
+          image: "/assets/images/jakes-resume.png",
+          prompt: templatePrompts["Software Engineer Resume"]
+        },
+      ];
 
     const handleNext = () => {
         if (selectedIndex !== null) {

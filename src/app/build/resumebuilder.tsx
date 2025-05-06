@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import TemplateSelector from "./components/TemplateSelector";
-import Form from "./components/Form";
+import TemplateSelector from "../components/TemplateSelector";
+import Form from "../components/Form";
 
 export default function ResumeBuilder() {
   const [selectedTemplate, setSelectedTemplate] = useState<null | {
