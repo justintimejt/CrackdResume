@@ -16,8 +16,15 @@ export async function GET(req: Request) {
         const fileBuffer = await readFile(pdfPath);
 
         return new NextResponse(fileBuffer, {
-            status: 200,
-        })
+            status: 200, //request succeeded
+            headers: {
+                'Content-Type': 'applicatio/pdf',
+                'Content-Disposition': `attachment; filename="resume-${id}.pdf`,
+            },
+        });
+    } catch (error) {
+        console.error('Error reading PDF file:', error);
+        return NextResponse.json({ error: 'File not found'}, { status: 404 });
     }
-
 }
+
