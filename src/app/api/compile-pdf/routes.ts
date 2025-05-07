@@ -16,7 +16,6 @@ export async function POST(req: Request) {
     try {
         await writeFile(texPath, latex);
 
-
         //COMPILE LATEX TO PDF using pdflatex
         await execAsync(`pdflatex -output-directory=${pdfDir} ${texPath}`);
         
