@@ -12,4 +12,17 @@ export async function POST(req: Request) {
     const id = uuidv4();
     const texPath = `/tmp/${id}.tex`;
     const pdfDir = `/tmp`;
+
+    try {
+        await writeFile(texPath, latex);
+
+
+        //COMPILE LATEX TO PDF using pdflatex
+        await execAsync(`pdflatex -output-directory=${pdfDir} ${texPath}`);
+        
+        return NextResponse.json({ id });
+    } catch (error) {
+        console.log("PDF Compile Error: ", error);
+        return NextResponse.json({ error: "Failed to compile PDF"}, { status: 500 });
+    }
 }
