@@ -18,7 +18,7 @@ export async function GET(req: Request) {
         return new NextResponse(fileBuffer, {
             status: 200, //request succeeded
             headers: {
-                'Content-Type': 'applicatio/pdf',
+                'Content-Type': 'application/pdf',
                 'Content-Disposition': `attachment; filename="resume-${id}.pdf`,
             },
         });
