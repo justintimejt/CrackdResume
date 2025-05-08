@@ -6,6 +6,7 @@ const ai = new GoogleGenerativeAI(process.env.GEMINI_KEY!);
 
 type TemplateName = keyof typeof templatePrompts;
 
+//Handle incoming POST request from onSubmit from form submission
 export async function POST(req: Request) {
     try {
 

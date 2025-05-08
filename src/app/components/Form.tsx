@@ -48,9 +48,10 @@ type Props = {
         name: string;
         image: string;
     };
+    onComplete: (latex: string) => Promise<void>;
 };  
 
-const Form = ({ selectedTemplate }: Props) => {
+const Form = ({ selectedTemplate, onComplete }: Props) => {
 
     //useState hook to track form field values
     const [formData, setFormData] = useState<PersonalInfo>({
@@ -61,6 +62,7 @@ const Form = ({ selectedTemplate }: Props) => {
         linkedin: '',
         website: ''
     });
+
 
     {/* Handle Form Changes*/}
 
@@ -257,9 +259,9 @@ const Form = ({ selectedTemplate }: Props) => {
 
         
             const data = await response.json();
-            console.log("LaTeX output:", data.latex);
+            console.log(data.latex);
 
-            setLatexOutput(data.latex);
+            onComplete(data.latex);
 
         } catch (error) {
             console.error("Error sending data:", error);
