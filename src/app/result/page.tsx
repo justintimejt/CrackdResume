@@ -19,8 +19,16 @@ const ResultPage = ({ id }: ResultPageProps) => {
             </div>
 
             {/*Download buttons*/}
-            
+            <div className="mt-6 flex flex-wrap gap-4">
+                <a href={pdfUrl} download="resume.pdf">
+                    <button className="px-4 py-4 bg-blue-600 text-white rounded hover:bg-blue-700">Download PDF</button>
+                </a>
+                <a href={texUrl} download="resume.tex">
+                    <button className="px-4 py-4 bg-green-600 text-white rounded hover:bg-green-700">Download .tex</button>
+                </a>
+            </div>
         </div>
+    );
+};
 
-    )
-}
+export default ResultPage;
