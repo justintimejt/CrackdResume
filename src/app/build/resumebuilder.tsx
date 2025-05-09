@@ -16,7 +16,10 @@ export default function ResumeBuilder() {
   const router = useRouter();
 
   const handleFormComplete = async (latex: string) => {
-    setLoading(true);
+    if (latex === "loading") {
+      setLoading(true); //render loading screen immediately
+      return;
+    }
 
     try {
       const compileRes = await fetch("/api/compile-pdf", {
@@ -31,7 +34,7 @@ export default function ResumeBuilder() {
       console.error("PDF compilation failed:", err);
       router.push("/build");
     }
-  };
+};
 
 
   return (
@@ -41,8 +44,7 @@ export default function ResumeBuilder() {
       ) : !selectedTemplate ? (
         <TemplateSelector onSelect={setSelectedTemplate} />
       ) : (
-        <Form selectedTemplate={selectedTemplate} 
-        onComplete={handleFormComplete}/>
+        <Form selectedTemplate={selectedTemplate} onStartLoading={() => setLoading(true)} onComplete={handleFormComplete}/>
       )}
     </div>
   );

@@ -49,10 +49,10 @@ type Props = {
         image: string;
     };
     onComplete: (latex: string) => Promise<void>;
+    onStartLoading: () => void;
 };  
 
-const Form = ({ selectedTemplate, onComplete }: Props) => {
-
+const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {    
     //useState hook to track form field values
     const [formData, setFormData] = useState<PersonalInfo>({
         firstname: '', //initial value
@@ -234,6 +234,8 @@ const Form = ({ selectedTemplate, onComplete }: Props) => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault(); //prevent default form submission
 
+        onStartLoading();
+
         const completeForm = {
             ...formData, //unpack form data
             education,
@@ -267,7 +269,6 @@ const Form = ({ selectedTemplate, onComplete }: Props) => {
             console.error("Error sending data:", error);
         }
 
-        //TODO: SEND FORM DATA TO BACKEND/GEMINI API
     };
 
     //render jsx
