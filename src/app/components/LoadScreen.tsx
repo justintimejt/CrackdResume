@@ -8,7 +8,7 @@ export default function LoadingPage() {
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prev) =>
-        prev >= 95 ? prev : prev + Math.floor(Math.random() * 5) + 1
+        prev >= 95 ? prev : prev + Math.floor(Math.random() * 10) + 1
       );
     }, 200);
 
