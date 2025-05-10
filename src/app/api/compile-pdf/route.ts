@@ -17,8 +17,8 @@ export async function POST(req: Request) {
         await writeFile(texPath, latex);
 
         //COMPILE LATEX TO PDF using pdflatex
-        await execAsync(`pdflatex -output-directory=${pdfDir} ${texPath}`);
-        
+        await execAsync(`/Library/TeX/texbin/pdflatex -output-directory=${pdfDir} ${texPath}`);
+        console.log("Compiled PDF ID:", id);
         return NextResponse.json({ id });
     } catch (error) {
         console.log("PDF Compile Error: ", error);
