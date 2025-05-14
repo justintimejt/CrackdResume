@@ -29,7 +29,7 @@ export async function POST(req: Request) {
         console.log("Compiled PDF ID:", id);
 
         const { stdout, stderr } = await execAsync(
-            `/Library/TeX/texbin/pdflatex -output-directory=${pdfDir} ${texPath}`
+            `/Library/TeX/texbin/pdflatex -interaction=nonstopmode -output-directory=${pdfDir} ${texPath}`
         )
         console.log('pdflatex stdout:', stdout);
         console.log('pdflatex stderr:', stderr);
