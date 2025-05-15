@@ -38,7 +38,10 @@ export default function ResumeBuilder() {
       }
 
       const { id } = await compileRes.json();
+      console.log("Navigation triggered to:", `/result?id=${id}`);
       router.push(`/result?id=${id}`);
+      console.log("Navigation triggered to:", `/result?id=${id}`);
+
     } catch (err) {
       console.error("PDF compilation failed:", err);
       router.push("/build");

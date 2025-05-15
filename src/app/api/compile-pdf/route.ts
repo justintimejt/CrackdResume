@@ -21,9 +21,6 @@ export async function POST(req: Request) {
     console.log(`Writing LaTeX to: ${texPath}`);
     await writeFile(texPath, latex);
 
-
-
-
     try {
         //COMPILE LATEX TO PDF using pdflatex
         console.log("Compiled PDF ID:", id);
@@ -31,10 +28,15 @@ export async function POST(req: Request) {
         const { stdout, stderr } = await execAsync(
             `/Library/TeX/texbin/pdflatex -output-directory=${pdfDir} ${texPath}`
         )
+
+        await access('/tmp');
+        console.log('/tmp is accessible');
+
         console.log('pdflatex stdout:', stdout);
         console.log('pdflatex stderr:', stderr);
 
         await access(pdfPath);
+        
         console.log(`PDF successfully created at: ${pdfPath}`);
         return NextResponse.json({ id });
     } catch (error) {
