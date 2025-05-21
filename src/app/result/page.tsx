@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Preview from '../components/Preview';
 interface ResultPageProps {
     params: { id: string };
@@ -10,7 +11,7 @@ interface ResultPageProps {
 export default function ResultPage ({ params }: ResultPageProps) {
     const [latex, setLatex] = useState('');
     const [loading, setLoading] = useState(true);
-    const pdfUrl = `/api/pdf?id=${params.id}`;
+    const pdfUrl = `/api/get-pdf?id=${params.id}`;
     const texUrl = `/api/tex?id=${params.id}`;
 
     useEffect(() => {

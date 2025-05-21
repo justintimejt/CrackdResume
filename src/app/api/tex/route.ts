@@ -13,9 +13,11 @@ export async function GET(req: Request) {
   const texPath = path.join('/tmp', `${id}.tex`);
 
   try {
-    const fileBuffer = await readFile(texPath);
+    const pdfBuffer = await readFile(texPath);
+    const pdfUint8Array = new Uint8Array(pdfBuffer);
 
-    return new NextResponse(fileBuffer, {
+
+    return new NextResponse(pdfUint8Array, {
       status: 200,
       headers: {
         'Content-Type': 'text/plain',

@@ -14,8 +14,9 @@ export async function POST(req: Request) {
     const { latex } = await req.json();
 
     const id = uuidv4();
-    const texPath = `/tmp/${id}.tex`;
-    const pdfPath = `/tmp/${id}.pdf`;
+    const tmpDir = '/tmp'
+    const texPath = path.join(tmpDir,`${id}.tex`);
+    const pdfPath = path.join(tmpDir,`${id}.pdf`);
 
     console.log("PDF ID:", id);
     console.log(`Writing LaTeX to: ${texPath}`);
@@ -26,23 +27,18 @@ export async function POST(req: Request) {
         console.log("Compiled PDF ID:", id);
 
         const { stdout, stderr } = await execAsync(
-            `/Library/TeX/texbin/pdflatex -interaction=nonstopmode -output-directory=/tmp ${texPath}`
+            `/Library/TeX/texbin/pdflatex -interaction=nonstopmode -output-directory=${tmpDir} ${texPath}`
         )
 
         console.log('pdflatex stdout:', stdout);
         console.log('pdflatex stderr:', stderr);
 
         await access(pdfPath);
-        const pdfBuffer = fs.readFileSync(pdfPath);
 
         console.log(`PDF successfully created at: ${pdfPath}`);
         
-        return new NextResponse(new Uint8Array(pdfBuffer), {
-            headers: {
-              'Content-Type': 'application/pdf',
-              'Content-Disposition': `inline; filename="output.pdf"`,
-            },
-        });
+        return NextResponse.json({ id });
+
     } catch (error) {
         console.log("PDF Compile Error: ", error);
         return NextResponse.json({ error: "Failed to compile PDF"}, { status: 500 });

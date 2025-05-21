@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { readFile } from 'fs/promises';
 import path from 'path';
 
+
 export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const id = searchParams.get('id');
@@ -13,9 +14,10 @@ export async function GET(req: Request) {
     const pdfPath = path.join('/tmp', `${id}.pdf`);
 
     try {
-        const fileBuffer = await readFile(pdfPath);
+        const pdfBuffer = await readFile(pdfPath);
+        const pdfUint8Array = new Uint8Array(pdfBuffer);
 
-        return new NextResponse(fileBuffer, {
+        return new NextResponse(pdfUint8Array, {
             status: 200, //request succeeded
             headers: {
                 'Content-Type': 'application/pdf',
