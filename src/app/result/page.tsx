@@ -3,16 +3,21 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Preview from '../components/Preview';
-interface ResultPageProps {
-    params: { id: string };
-    searchParams?: { [key: string]: string | undefined };
-}
 
-export default function ResultPage ({ params }: ResultPageProps) {
+
+export default function ResultPage () {
+    const searchParams = useSearchParams();
+    const id = searchParams.get('id');
+
     const [latex, setLatex] = useState('');
     const [loading, setLoading] = useState(true);
-    const pdfUrl = `/api/get-pdf?id=${params.id}`;
-    const texUrl = `/api/tex?id=${params.id}`;
+
+    if (!id) {
+        return <div>Error: Missing resume ID.</div>
+    }
+
+    const pdfUrl = `/api/get-pdf?id=${id}`;
+    const texUrl = `/api/tex?id=${id}`;
 
     useEffect(() => {
         const fetchLatex = async () => {
@@ -26,7 +31,7 @@ export default function ResultPage ({ params }: ResultPageProps) {
             }
         };
         fetchLatex();
-    }, [params.id, texUrl]);
+    }, [id, texUrl]);
 
     if (loading) return <div>Loading preview...</div>;
 
