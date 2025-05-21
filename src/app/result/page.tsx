@@ -1,21 +1,44 @@
-import React from 'react';
+'use client';
 
+import { useEffect, useState } from 'react';
+import Preview from '../components/Preview';
 interface ResultPageProps {
-    id: string;
+    params: { id: string };
+    searchParams?: { [key: string]: string | undefined };
 }
 
-const ResultPage = ({ id }: ResultPageProps) => {
-    const pdfUrl = `/api/pdf?id=${id}`;
-    const texUrl = `/api/tex?id=${id}`;
+export default function ResultPage ({ params }: ResultPageProps) {
+    const [latex, setLatex] = useState('');
+    const [loading, setLoading] = useState(true);
+    const pdfUrl = `/api/pdf?id=${params.id}`;
+    const texUrl = `/api/tex?id=${params.id}`;
 
+    useEffect(() => {
+        const fetchLatex = async () => {
+            try {
+                const res = await fetch(texUrl);
+                setLatex(await res.text());
+            } catch(err) {
+                console.error('Failed to fetch LaTeX:', err);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchLatex();
+    }, [params.id, texUrl]);
+
+    if (loading) return <div>Loading preview...</div>;
 
     return (
         <div className="flex flex-col items-center px-4 py-6">
-            <h1 className="w-full max-w-4xl h-[90vh] border shadow-lg"></h1>
-
-            {/*PDF PREVIEW*/}
-            <div className="w-full max-w-4xl h-[90vh] border shadow-lg">
-                <iframe src={pdfUrl} width="100%" height="100%" className="rounded-md"/>
+            <Preview latex={latex} />
+      
+            <div className="w-full max-w-4xl h-[70vh] border shadow-lg">
+                <iframe 
+                    src={pdfUrl}
+                    className="w-full h-full rounded-md"
+                    title="PDF Preview"
+                />
             </div>
 
             {/*Download buttons*/}
@@ -30,5 +53,3 @@ const ResultPage = ({ id }: ResultPageProps) => {
         </div>
     );
 };
-
-export default ResultPage;
