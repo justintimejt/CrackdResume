@@ -12,7 +12,7 @@ export const templatePrompts = {
     %-------------------------
     \\documentclass[letterpaper,11pt]{article}
     \\usepackage{latexsym}
-    \\usepackage[empty]{fullpage}
+    \\usepackage[margin=1in]{geometry}
     \\usepackage{titlesec}
     \\usepackage{marvosym}
     \\usepackage[usenames,dvipsnames]{color}
@@ -122,6 +122,7 @@ export const templatePrompts = {
     \\end{document}
 
     INSTRUCTIONS TO GEMINI:
+    - Return only the raw LaTeX code. Do NOT include any markdown syntax or indentation.
     - DO NOT OMIT ANY OF THE ABOVE STRUCTURE.
     - DO NOT GENERATE ANY NON-LATEX TEXT.
     - EVERY SECTION MUST MIRROR THE EXAMPLES ABOVE EXACTLY.
