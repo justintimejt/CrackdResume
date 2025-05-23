@@ -37,7 +37,7 @@ export default function ResultPage () {
 
     return (
         <div className="flex flex-col items-center px-4 py-6">
-            <Preview latex={latex} />
+            {/* <Preview latex={latex} /> */}
       
             <div className="w-full max-w-4xl h-[70vh] border shadow-lg">
                 <iframe 
