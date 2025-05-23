@@ -16,7 +16,7 @@ export default function Home() {
         </div>
           
       </nav>
-      <main className="mt-24 text-white text-center px-6">
+      <main className="mt-50 text-white text-center px-6">
         <div>
           <h1 className="text-5xl font-extrabold tracking-tight mb-6">
             The Ulimate AI Resume Generator
@@ -28,14 +28,14 @@ export default function Home() {
 
         <div className="flex justify-center space-x-4">
           <a
-            href="/generate"
-            className="bg-white text-black px-6 py-3 rounded-xl font-semibold shadow hover:bg-gray-100 transition"
+            href="/build"
+            className="bg-white text-black px-6 py-3 rounded-xl shadow hover:bg-gray-100 transition"
           >
-            Create Resume Now
+            Generate Now
           </a>
           <a
             href="https://github.com/yourusername/yourrepo"
-            className="bg-transparent border border-white px-6 py-3 rounded-xl font-semibold text-white hover:bg-white hover:text-black transition"
+            className="bg-transparent border border-white px-6 py-3 rounded-xl text-white hover:bg-white hover:text-black transition"
             target="_blank" rel="noopener noreferrer"
           >
             <div className="flex space-x-2">
