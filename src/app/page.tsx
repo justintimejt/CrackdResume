@@ -1,5 +1,8 @@
 import Image from "next/image";
 import { FaGithub } from 'react-icons/fa'; // Add this at the top
+import { FaLinkedin } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
+import { IoIosArrowDown } from "react-icons/io";
 
 
 export default function Home() {
@@ -82,6 +85,12 @@ export default function Home() {
               </div>
             </div>
           </div>
+          <div className='flex items-center justify-center'>
+            <button className ='flex items-center space-x-2 font-bold text-white px-6 transition'>
+              <IoIosArrowDown className ='text-3xl'/>
+            </button>
+              
+          </div>
 
         </div>
 
@@ -127,8 +136,23 @@ export default function Home() {
         </section>
       </main>
 
-      <footer>
-       
+      <footer className="text-white bg-black border-t border-gray-800 py-6 mt-10 px-8">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <div className="flex space-x-6 text-2xl">
+            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <FaGithub className="hover:text-gray-400 transition" />
+            </a>
+            <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+              <FaXTwitter className="hover:text-gray-400 transition" />
+            </a>
+            <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <FaLinkedin className="hover:text-gray-400 transition" />
+            </a>
+          </div>
+
+   
+          <p className="text-sm text-gray-400">&copy; Justin Chow 2025</p>
+        </div>
       </footer>
     </div>
   );
