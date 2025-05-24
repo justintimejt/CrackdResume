@@ -66,7 +66,6 @@ export default function Home() {
               <div className="w-48 h-48 md:w-64 md:h-64 bg-gray-800 rounded-2xl border-4 border-dashed border-gray-600 flex items-center justify-center">
                   {/* insert component */}
               </div>
-              <div className="absolute -bottom-6 left-0 right-0 text-center text-sm text-gray-400">1. Fill Form</div>
             </div>
 
              {/* arrow */}
@@ -81,7 +80,6 @@ export default function Home() {
               <div className="w-48 h-48 md:w-64 md:h-64 bg-gray-800 rounded-2xl border-4 border-dashed border-gray-600 flex items-center justify-center">
                 {/* insert component */}
               </div>
-              <div className="absolute -bottom-6 left-0 right-0 text-center text-sm text-gray-400">2. Get Resume</div>
             </div>
           </div>
 
