@@ -30,7 +30,6 @@ export default function Home() {
               The 
                 <span className="relative mx-3 inline-block">
                   <span className="absolute -inset-2 -rotate-3 transform bg-gradient-to-br from-blue-500 to-cyan-400 rounded-lg blur-[1px] opacity-80 group-hover:opacity-100 transition-opacity"></span>
-                  
                   <span className="relative rotate-3 inline-block px-2 bg-clip-text text-transparent bg-gradient-to-r from-white to-cyan-100">
                     AI
                   </span>
@@ -85,12 +84,14 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className='flex items-center justify-center'>
+
+          {/* optional arrow */}
+          {/* <div className='flex items-center justify-center'>
             <button className ='flex items-center space-x-2 font-bold text-white px-6 transition'>
               <IoIosArrowDown className ='text-3xl'/>
             </button>
               
-          </div>
+          </div> */}
 
         </div>
 
@@ -142,15 +143,13 @@ export default function Home() {
             <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
               <FaGithub className="hover:text-gray-400 transition" />
             </a>
-            <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+            <a href="https://x.com/justinpchow?s=21" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
               <FaXTwitter className="hover:text-gray-400 transition" />
             </a>
-            <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/justin-chow-a74a972b5/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <FaLinkedin className="hover:text-gray-400 transition" />
             </a>
           </div>
-
-   
           <p className="text-sm text-gray-400">&copy; Justin Chow 2025</p>
         </div>
       </footer>
