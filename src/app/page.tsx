@@ -58,7 +58,34 @@ export default function Home() {
               
             </a>
           </div>
+          {/* form -> resume visual*/}
+          <div className="flex justify-center items-center my-12 space-x-4 md:space-x-8">
+            
+            {/* form placeholder */}
+            <div className="relative">
+              <div className="w-32 h-32 md:w-40 md:h-40 bg-gray-800 rounded-xl border-2 border-dashed border-gray-600 flex items-center justify-center">
+                
+              </div>
+              <div className="absolute -bottom-6 left-0 right-0 text-center text-sm text-gray-400">1. Fill Form</div>
+            </div>
+
+             {/* arrow */}
+            <div className="text-gray-500">
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+              </svg>
+            </div>
+
+            {/* resume placeholder*/}
+            <div className="relative">
+              <div className="w-32 h-32 md:w-40 md:h-40 bg-gray-800 rounded-xl border-2 border-dashed border-gray-600 flex items-center justify-center">
+                <img src="./assets/images/jakes-resume.png" alt="Resume Placeholder" />
+              </div>
+              <div className="absolute -bottom-6 left-0 right-0 text-center text-sm text-gray-400">2. Get Resume</div>
+            </div>
+          </div>
         </div>
+
       
         <section className="max-w-6xl mx-auto px-6 py-20">
           <div className="text-center mb-16">
