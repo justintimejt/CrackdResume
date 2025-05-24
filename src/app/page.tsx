@@ -5,7 +5,7 @@ import { FaGithub } from 'react-icons/fa'; // Add this at the top
 export default function Home() {
   return (
     <div className="bg-black min-h-screen">
-      <nav className ="w-19/20 mx-auto sticky top-4 bg-black rounded-3xl shadow-md p-4 z-50 flex justify-between items-center">
+      <nav className ="w-19/20 mx-auto relative top-4 bg-black rounded-3xl shadow-md p-4 z-50 flex justify-between items-center">
 
         <div className="text-lg font-bold text-white">
           <button className="relative text-white after:absolute after:left-1/2 after:bottom-0 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-white after:transition-all after:duration-300 hover:after:w-full">
@@ -59,12 +59,12 @@ export default function Home() {
             </a>
           </div>
           {/* form -> resume visual*/}
-          <div className="flex justify-center items-center my-12 space-x-4 md:space-x-8">
+          <div className="flex justify-center items-center my-24 space-x-8 md:space-x-16">
             
             {/* form placeholder */}
-            <div className="relative">
-              <div className="w-32 h-32 md:w-40 md:h-40 bg-gray-800 rounded-xl border-2 border-dashed border-gray-600 flex items-center justify-center">
-                
+            <div className="flex flex-col items-center">
+              <div className="w-48 h-48 md:w-64 md:h-64 bg-gray-800 rounded-2xl border-4 border-dashed border-gray-600 flex items-center justify-center">
+                  {/* insert component */}
               </div>
               <div className="absolute -bottom-6 left-0 right-0 text-center text-sm text-gray-400">1. Fill Form</div>
             </div>
@@ -77,13 +77,14 @@ export default function Home() {
             </div>
 
             {/* resume placeholder*/}
-            <div className="relative">
-              <div className="w-32 h-32 md:w-40 md:h-40 bg-gray-800 rounded-xl border-2 border-dashed border-gray-600 flex items-center justify-center">
-                <img src="./assets/images/jakes-resume.png" alt="Resume Placeholder" />
+            <div className="flex flex-col items-center">
+              <div className="w-48 h-48 md:w-64 md:h-64 bg-gray-800 rounded-2xl border-4 border-dashed border-gray-600 flex items-center justify-center">
+                {/* insert component */}
               </div>
               <div className="absolute -bottom-6 left-0 right-0 text-center text-sm text-gray-400">2. Get Resume</div>
             </div>
           </div>
+
         </div>
 
       
