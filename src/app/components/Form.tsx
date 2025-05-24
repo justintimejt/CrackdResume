@@ -271,6 +271,8 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
 
     };
 
+    const inputClass = "border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400";
+
     //render jsx
     return (
         <form onSubmit={handleSubmit} className="space-y-4 mx-auto max-w-3xl border rounded-xl p-10 bg-gray-200">
@@ -286,7 +288,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                     placeholder="First Name"
                     value={formData.firstname}
                     onChange={handleChange}
-                    className="border p-2 w-full mb-2"
+                    className={`${inputClass} mb-2`}
                 />
                 <input
                     type="text"
@@ -294,7 +296,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                     placeholder="Last Name"
                     value={formData.lastname}
                     onChange={handleChange}
-                    className="border p-2 w-full mb-2"
+                    className={`${inputClass} mb-2`}
                 />
                 <input
                     type="email"
@@ -302,7 +304,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                     placeholder="Email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="border p-2 w-full mb-2"
+                    className={`${inputClass} mb-2`}
                 />
                 <input
                     type="text"
@@ -310,7 +312,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                     placeholder="Phone Number"
                     value={formData.phonenumber}
                     onChange={handleChange}
-                    className="border p-2 w-full mb-2"
+                    className={`${inputClass} mb-2`}
                 />
                 <input
                     type="text"
@@ -318,7 +320,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                     placeholder="LinkedIn (optional)"
                     value={formData.linkedin}
                     onChange={handleChange}
-                    className="border p-2 w-full mb-2"
+                    className={`${inputClass} mb-2`}
                 />
                 <input
                     type="text"
@@ -326,7 +328,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                     placeholder="Website (optional)"
                     value={formData.website}
                     onChange={handleChange}
-                    className="border p-2 w-full"
+                    className={`${inputClass}`}
                 />
             </div>
 
@@ -351,14 +353,14 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                                 placeholder="School"
                                 value={edu.school}
                                 onChange={(e) => handleEducationChange(eduIndex, 'school', e.target.value)}
-                                className="border p-2 w-full"
+                                className={inputClass}
                             />
                             <input
                                 type="text"
                                 placeholder="Degree"
                                 value={edu.degree}
                                 onChange={(e) => handleEducationChange(eduIndex, 'degree', e.target.value)}
-                                className="border p-2 w-full"
+                                className={inputClass}
                             />
                             <label className="text-sm font-medium text-gray-700">
                                 Start Year
@@ -368,7 +370,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                                 placeholder=""
                                 value={edu.startyear}
                                 onChange={(e) => handleEducationChange(eduIndex, 'startyear', e.target.value)}
-                                className="border p-2 w-full"
+                                className={inputClass}
                             />
                             <label className="text-sm font-medium text-gray-700">
                                 End Year
@@ -378,13 +380,13 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                                 placeholder=""
                                 value={edu.endyear}
                                 onChange={(e) => handleEducationChange(eduIndex, 'endyear', e.target.value)}
-                                className="border p-2 w-full"
+                                className={inputClass}
                             />
                             <textarea
                                 placeholder="Location"
                                 value={edu.location}
                                 onChange={(e) => handleEducationChange(eduIndex, 'location', e.target.value)}
-                                className="border p-2 w-full"
+                                className={inputClass}
                             />
                         </div>
                     ))}
@@ -457,21 +459,21 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                                 placeholder="Job Title"
                                 value={exp.title}
                                 onChange={(e) => handleExperienceChange(expIndex, 'title', e.target.value)}
-                                className="border p-2 w-full"
+                                className={inputClass}
                             />
                             <input
                                 type="text"
                                 placeholder="Company"
                                 value={exp.company}
                                 onChange={(e) => handleExperienceChange(expIndex, 'company', e.target.value)}
-                                className="border p-2 w-full"
+                                className={inputClass}
                             />
                             <input
                                 type="text"
                                 placeholder="Location"
                                 value={exp.location}
                                 onChange={(e) => handleExperienceChange(expIndex, 'location', e.target.value)}
-                                className="border p-2 w-full"
+                                className={inputClass}
                             />
                             <label className="text-sm font-medium text-gray-700">
                                 Start Date
@@ -481,7 +483,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                                 placeholder="Start Date"
                                 value={exp.startdate}
                                 onChange={(e) => handleExperienceChange(expIndex, 'startdate', e.target.value)}
-                                className="border p-2 w-full"
+                                className={inputClass}
                             />
                             <label className="text-sm font-medium text-gray-700">
                                 End Date
@@ -491,13 +493,13 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                                 placeholder="End Date"
                                 value={exp.enddate}
                                 onChange={(e) => handleExperienceChange(expIndex, 'enddate', e.target.value)}
-                                className="border p-2 w-full"
+                                className={inputClass}
                             />
                             <textarea
                                 placeholder="Description"
                                 value={exp.description}
                                 onChange={(e) => handleExperienceChange(expIndex, 'description', e.target.value)}
-                                className="border p-2 w-full"
+                                className={inputClass}
                             />
                         </div>
                     ))}
@@ -524,7 +526,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                                 placeholder="Project Name"
                                 value={proj.projectname}
                                 onChange={(e) => handleProjectChange(projIndex, 'projectname', e.target.value)}
-                                className="border p-2 w-full"
+                                className={inputClass}
                             />
                             <label className="text-sm font-medium text-gray-700">
                                 Start Date
@@ -534,7 +536,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                                 placeholder="Start Date"
                                 value={proj.startdate}
                                 onChange={(e) => handleProjectChange(projIndex, 'startdate', e.target.value)}
-                                className="border p-2 w-full"
+                                className={inputClass}
                             />
                             <label className="text-sm font-medium text-gray-700">
                                 End Date
@@ -544,13 +546,13 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                                 placeholder="End Date"
                                 value={proj.enddate}
                                 onChange={(e) => handleProjectChange(projIndex, 'enddate', e.target.value)}
-                                className="border p-2 w-full"
+                                className={inputClass}
                             />
                             <textarea
                                 placeholder="Description"
                                 value={proj.description}
                                 onChange={(e) => handleProjectChange(projIndex, 'description', e.target.value)}
-                                className="border p-2 w-full"
+                                className={inputClass}
                             />
                             <div className="flex gap-2">
                                 <input
@@ -559,7 +561,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                                     value={techInputs[projIndex]}
                                     onChange={(e) => handleTechInputChange(projIndex, e.target.value)}
                                     onKeyDown={(e) => handleTechKeyDown(e, projIndex)}
-                                    className="border p-2 flex-1"
+                                    className={inputClass}
                                 />
                                 <button
                                     type="button"
