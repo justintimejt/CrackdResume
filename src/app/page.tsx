@@ -59,6 +59,46 @@ export default function Home() {
             </a>
           </div>
         </div>
+      
+        <section className="max-w-6xl mx-auto px-6 py-20">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 mb-4">
+              Build Resumes That Get Noticed
+            </h2>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              Everything you need to create the perfect developer resume
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Card 1 */}
+            <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-8 hover:border-gray-700 transition-colors">
+              <div className="text-2xl mb-4">🔍</div>
+              <h3 className="text-xl font-semibold mb-3">AI-Powered Suggestions</h3>
+              <p className="text-gray-400">
+                [Placeholder] Our AI analyzes your experience and suggests impactful bullet points.
+              </p>
+            </div>
+
+            {/* Card 2 */}
+            <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-8 hover:border-gray-700 transition-colors">
+              <div className="text-2xl mb-4">✨</div>
+              <h3 className="text-xl font-semibold mb-3">LaTeX Quality Output</h3>
+              <p className="text-gray-400">
+                [Placeholder] Professionally formatted resumes that pass through ATS systems.
+              </p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-8 hover:border-gray-700 transition-colors">
+              <div className="text-2xl mb-4">⚡</div>
+              <h3 className="text-xl font-semibold mb-3">Real-Time Preview</h3>
+              <p className="text-gray-400">
+                [Placeholder] See changes instantly as you build your perfect resume.
+              </p>
+            </div>
+          </div>
+        </section>
       </main>
 
       <footer>
