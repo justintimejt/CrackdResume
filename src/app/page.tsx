@@ -8,7 +8,9 @@ export default function Home() {
       <nav className ="w-19/20 mx-auto sticky top-4 bg-black rounded-3xl shadow-md p-4 z-50 flex justify-between items-center">
 
         <div className="text-lg font-bold text-white">
-          resumeapp
+          <button className="text-white hover:underline">
+            resumeapp
+          </button>
         </div>
         <div className="flex space-x-6">
           <button className="text-md text-white">Source Code</button>
@@ -19,8 +21,16 @@ export default function Home() {
       <main className="mt-20 text-white text-center px-6">
         <div className="mt-20 bg-gradient-to-br from-gray-900 to-black rounded-3xl border border-gray-800 p-12 text-center">
           <div>
-            <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
-              The Ulimate <span>AI</span> Resume Generator
+            <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]">
+              The 
+                <span className="relative mx-3 inline-block">
+                  <span className="absolute -inset-2 -rotate-3 transform bg-gradient-to-br from-blue-500 to-cyan-400 rounded-lg blur-[1px] opacity-80 group-hover:opacity-100 transition-opacity"></span>
+                  
+                  <span className="relative rotate-3 inline-block px-2 bg-clip-text text-transparent bg-gradient-to-r from-white to-cyan-100">
+                    AI
+                  </span>
+                </span>
+              Resume Generator
             </h1>
             <p className="text-xl text-gray-300 mb-10 mx-auto">
               Generate professional LaTeX resumes effortlessly — powered by AI, designed for devs.
