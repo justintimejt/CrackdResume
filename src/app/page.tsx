@@ -107,7 +107,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Card 1 */}
+            
             <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-8 hover:border-gray-700 transition-colors">
               <div className="text-2xl mb-4">🔍</div>
               <h3 className="text-xl font-semibold mb-3">AI-Powered Suggestions</h3>
@@ -116,7 +116,7 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Card 2 */}
+            
             <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-8 hover:border-gray-700 transition-colors">
               <div className="text-2xl mb-4">✨</div>
               <h3 className="text-xl font-semibold mb-3">LaTeX Quality Output</h3>
@@ -125,7 +125,7 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Card 3 */}
+            
             <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-8 hover:border-gray-700 transition-colors">
               <div className="text-2xl mb-4">⚡</div>
               <h3 className="text-xl font-semibold mb-3">Real-Time Preview</h3>
