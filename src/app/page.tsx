@@ -8,12 +8,14 @@ export default function Home() {
       <nav className ="w-19/20 mx-auto sticky top-4 bg-black rounded-3xl shadow-md p-4 z-50 flex justify-between items-center">
 
         <div className="text-lg font-bold text-white">
-          <button className="text-white hover:underline">
+          <button className="relative text-white after:absolute after:left-1/2 after:bottom-0 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-white after:transition-all after:duration-300 hover:after:w-full">
             resumeapp
           </button>
         </div>
         <div className="flex space-x-6">
-          <button className="text-md text-white">Source Code</button>
+          <button className="relative text-white after:absolute after:left-1/2 after:bottom-0 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-white after:transition-all after:duration-300 hover:after:w-full">
+            Source Code
+          </button>
           <button className="text-md text-black bg-white p-2 rounded-md"><a href="/build">Gen Now</a></button>
         </div>
           
