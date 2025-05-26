@@ -54,7 +54,7 @@ const TemplateSelector = ({ onSelect }: Props) => {
                     <button 
                         key={index}
                         onClick={() => setSelectedIndex(index)}
-                        className={`border border-amber-50 rounded-md shadow-lg bg-gray-100 p-6 transition transform hover:scale-105 duration-150 flex flex-col items-center gap-2 filter drop-shadow-[0_4px_8px_rgba(255,255,255,0.6)] ${
+                        className={`border border-amber-50 rounded-md shadow-lg bg-white p-6 transition transform hover:scale-105 duration-150 flex flex-col items-center gap-2 filter drop-shadow-[0_4px_8px_rgba(255,255,255,0.6)] ${
                             selectedIndex === index
                                 ? "ring-2 ring-blue-500 bg-blue-50"
                                 : "hover:ring-1 hover:ring-blue-500"
