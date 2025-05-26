@@ -271,7 +271,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
 
     };
 
-    const inputClass = "border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400";
+    const inputClass = "border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400 text-black placeholder-gray-500";
 
     //render jsx
     return (
@@ -282,16 +282,15 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                     Enter Your Resume Details
                 </h1>
                 <p className="text-white text-xl text-center">
-                    Provide your personal details, education, projects, experience, skills — we’ll do the rest.
+                    Provide your personal details, education, projects, experience, and skills — we’ll do the rest.
                 </p>
             </div>
-            <form onSubmit={handleSubmit} className="space-y-4 mx-auto max-w-3xl border rounded-xl p-10 bg-gray-200">
-
+            <form onSubmit={handleSubmit} className="space-y-4 mx-auto max-w-3xl border border-gray-800 rounded-3xl p-10 text-white bg-gradient-to-br from-gray-900 to-black">
+                <h2 className="text-xl font-semibold mb-4">
+                    Personal Information
+                </h2>
                 {/* Personal Info Card */}
                 <div className="border p-6 rounded bg-white shadow">
-                    <h2 className="text-xl font-semibold mb-4">
-                        Personal Information
-                    </h2>
                     <input
                         type="text"
                         name="firstname"
