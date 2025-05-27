@@ -39,13 +39,12 @@ export default function ResultPage () {
 
     return (
         <div className ='bg-black min-h-screen'>
-            
             <div className="flex flex-col items-center px-4 py-6">
                 <h1 className ='text-3xl md:text-4xl font-semibold text-center mb-6 text-white drop-shadow-[0_0_10px_rgba(59,130,246,0.7)]'>
-                    Your Resume is Ready!
+                    Download Your Resume
                 </h1>
                 <p className='text-center text-gray-300 text-lg mb-8 max-w-2xl mx-auto'>
-                    Download as a pdf or tex file - happy job hunting :/
+                    Your interview-ready resume is available as PDF or LaTex - go impress those recruiters!
                 </p>
         
                 <div className="w-full max-w-4xl h-[70vh] border shadow-lg">
@@ -68,8 +67,9 @@ export default function ResultPage () {
                     <a href={texUrl} download="resume.tex">
                         <button className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:from-blue-500 hover:to-cyan-500 flex items-center gap-2">
                             Download Latex
+                            <FaFileCode className="h-5 w-5 opacity-90" />
                         </button>
-                        <FaFileCode className="h-5 w-5 opacity-90" />
+                        
                     </a>
                 </div>
             </div>
