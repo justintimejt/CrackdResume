@@ -110,9 +110,9 @@ export default function Home() {
             
             <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-8 hover:border-gray-700 transition-colors">
               <div className="text-2xl mb-4">🔍</div>
-              <h3 className="text-xl font-semibold mb-3">AI-Powered Suggestions</h3>
+              <h3 className="text-xl font-semibold mb-3">AI-Powered Generation</h3>
               <p className="text-gray-400">
-                [Placeholder] Our AI analyzes your experience and suggests impactful bullet points.
+                Powered by Google Gemini Flash 1.5 generative AI model.
               </p>
             </div>
 
@@ -121,16 +121,16 @@ export default function Home() {
               <div className="text-2xl mb-4">✨</div>
               <h3 className="text-xl font-semibold mb-3">LaTeX Quality Output</h3>
               <p className="text-gray-400">
-                [Placeholder] Professionally formatted resumes that pass through ATS systems.
+                Professionally formatted resumes that pass through ATS systems.
               </p>
             </div>
 
             
             <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-8 hover:border-gray-700 transition-colors">
               <div className="text-2xl mb-4">⚡</div>
-              <h3 className="text-xl font-semibold mb-3">Real-Time Preview</h3>
+              <h3 className="text-xl font-semibold mb-3">Lightning-Fast System</h3>
               <p className="text-gray-400">
-                [Placeholder] See changes instantly as you build your perfect resume.
+                Build and generate industry standard resumes in less than 10 seconds.
               </p>
             </div>
           </div>
