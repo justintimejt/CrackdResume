@@ -368,7 +368,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                                     className={inputClass}
                                 />
                                 <label className="text-sm font-medium text-gray-700">
-                                    Start Year
+                                    Start Date
                                 </label>
                                 <input
                                     type="date"
@@ -378,7 +378,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                                     className={inputClass}
                                 />
                                 <label className="text-sm font-medium text-gray-700">
-                                    End Year
+                                    End Date
                                 </label>
                                 <input
                                     type="date"
@@ -562,7 +562,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                                 <div className="flex gap-2">
                                     <input
                                         type="text"
-                                        placeholder="Add Technology (press Enter)"
+                                        placeholder="Add technology (press Enter)"
                                         value={techInputs[projIndex]}
                                         onChange={(e) => handleTechInputChange(projIndex, e.target.value)}
                                         onKeyDown={(e) => handleTechKeyDown(e, projIndex)}
@@ -571,7 +571,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                                     <button
                                         type="button"
                                         onClick={() => addTechnology(projIndex)}
-                                        className="bg-green-500 text-white px-3 py-2 rounded"
+                                        className="bg-white text-gray-800 px-3 py-1 rounded-lg border border-gray-200 shadow-sm hover:shadow-md hover:bg-gray-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:bg-gray-50"
                                     >
                                         +
                                     </button>
@@ -610,7 +610,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
         
                         <span className="absolute -inset-2 -rotate-3 transform bg-gradient-to-br from-blue-500 to-cyan-400 rounded-lg blur-[1px] opacity-80 group-hover:opacity-100 transition-opacity"></span>
                         <div className='flex items-center gap-2'>
-                            <span className="relative z-10 text-xl">Generate</span>
+                            <span className="relative z-10 text-md">Generate</span>
                             <FaWandMagicSparkles className='relative z-10' />
                         </div>
                     </button>
