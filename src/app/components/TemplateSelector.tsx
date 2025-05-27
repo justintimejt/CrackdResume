@@ -49,7 +49,7 @@ const TemplateSelector = ({ onSelect }: Props) => {
             <h1 className=" text-white pb-5 text-xl font-semibold">Choose Resume Template:</h1>
 
             {/*template options*/}
-            <div className="grid grid-cols-3 gap-10">
+            <div className="flex flex-col gap-6 md:grid md:grid-cols-3 md:gap-10">
                 {templates.map((template, index) => (
                     <button 
                         key={index}
