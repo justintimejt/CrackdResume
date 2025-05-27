@@ -67,23 +67,17 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
     {/* Handle Form Changes*/}
 
     //handle education section
-    const [education, setEducation] = useState<Education[]>([
-        { school: '', degree: '', startyear: '', endyear: '',location: ''}
-    ]);
+    const [education, setEducation] = useState<Education[]>([]);
 
     const [skills, setSkills] = useState<Skills>([]);
 
     const [skillInput, setSkillInput] = useState<string> ('');
 
     //handle experience section
-    const [experiences, setExperiences] = useState<Experience[]>([
-        { title: '', company: '', location: '', startdate: '', enddate: '', description: '' }
-    ]);
+    const [experiences, setExperiences] = useState<Experience[]>([]);
 
     //handle projects section
-    const [projects, setProjects] = useState<Project[]>([
-        { projectname: '', technologies: [], startdate: '', enddate: '', description: '' }
-    ]);
+    const [projects, setProjects] = useState<Project[]>([]);
 
     const[techInputs, setTechInputs] = useState<string[]>(['']);
 
