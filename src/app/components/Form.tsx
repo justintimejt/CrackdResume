@@ -271,7 +271,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
 
     };
 
-    const inputClass = "border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400 text-black placeholder-gray-500";
+    const inputClass = "border border-slate-800 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-100 placeholder-gray-500 bg-slate-800";
 
     //render jsx
     return (
@@ -290,7 +290,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                     Personal Information
                 </h2>
                 {/* Personal Info Card */}
-                <div className="border p-6 rounded bg-white shadow">
+                <div className="rounded shadow">
                     <input
                         type="text"
                         name="firstname"
@@ -347,7 +347,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                     <div className="space-y-4">
                         <h2 className="text-lg font-semibold">Education</h2>
                         {education.map((edu, eduIndex) => (
-                            <div key={eduIndex} className="space-y-2 border p-4 rounded bg-gray-50 relative">
+                            <div key={eduIndex} className="space-y-2 relative">
                                 <button
                                     type="button"
                                     onClick={() => {
