@@ -271,7 +271,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
 
     };
 
-    const inputClass = "border border-slate-800 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-100 placeholder-gray-500 bg-slate-800";
+    const inputClass = "border border-slate-800 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-100 placeholder-gray-500 bg-slate-800 transition duration-200";
 
     //render jsx
     return (
@@ -414,7 +414,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                                     value={skillInput}
                                     onChange={handleSkillInputChange}
                                     onKeyDown={handleSkillKeyDown}
-                                    className="border p-2 w-full appearance-none bg-white"
+                                    className={`${inputClass}`}
                                 />
                                 <button
                                     type="button"
