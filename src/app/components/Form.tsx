@@ -271,7 +271,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
     return (
         
         <div>
-            <div className="flex flex-col justify-center items-center py-8 px-4">
+            <div className="flex flex-col justify-center items-center py-4 px-4">
                 <h1 className ="text-white text-3xl font-semibold drop-shadow-[0_0_10px_rgba(255,255,255,0.7)] mb-4">
                     Enter Your Resume Details
                 </h1>
@@ -393,7 +393,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                                 />
                             </div>
                         ))}
-                        <button type="button" onClick={addEducation} className="mt-2 bg-green-500 text-white px-4 py-2 rounded">+ Add Education</button>
+                        <button type="button" onClick={addEducation} className="mt-2 bg-white text-gray-800 px-4 py-2 rounded-lg border border-gray-200 shadow-sm hover:shadow-md hover:bg-gray-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:bg-gray-50">+ Add Education</button>
                     </div>
 
                     {/* Skills Section */}
@@ -413,7 +413,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                                 <button
                                     type="button"
                                     onClick={addSkill}
-                                    className="bg-green-500 text-white px-4 py-2 rounded"
+                                    className="bg-white text-gray-800 px-4 py-2 rounded-lg border border-gray-200 shadow-sm hover:shadow-md hover:bg-gray-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:bg-gray-50"
                                 >
                                     Add
                                 </button>
@@ -506,7 +506,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                                 />
                             </div>
                         ))}
-                        <button type="button" onClick={addExperience} className="mt-2 bg-green-500 text-white px-4 py-2 rounded">+ Add Experience</button>
+                        <button type="button" onClick={addExperience} className="mt-2 bg-white text-gray-800 px-4 py-2 rounded-lg border border-gray-200 shadow-sm hover:shadow-md hover:bg-gray-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:bg-gray-50">+ Add Experience</button>
                     </div>
 
                     {/* Projects Section */}
@@ -576,7 +576,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                                 </div>
                                 <div className="flex flex-wrap gap-2">
                                     {proj.technologies.map((tech, techIndex) => (
-                                        <span key={techIndex} className="bg-gray-200 px-3 py-1 rounded-full text-sm flex items-center">
+                                        <span key={techIndex} className="bg-gray-200 px-3 py-1 rounded-full text-sm flex items-center text-black">
                                             {tech}
                                             <button
                                                 type="button"
@@ -594,7 +594,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                                 </div>
                             </div>
                         ))}
-                        <button type="button" onClick={addProject} className="mt-2 bg-green-500 text-white px-4 py-2 rounded">+ Add Project</button>
+                        <button type="button" onClick={addProject} className="mt-2 bg-white text-gray-800 px-4 py-2 rounded-lg border border-gray-200 shadow-sm hover:shadow-md hover:bg-gray-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:bg-gray-50">+ Add Project</button>
                     </div>
                 </div>
 
