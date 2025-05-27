@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { useState } from 'react';
+import { FaWandMagicSparkles } from "react-icons/fa6";
+
 
 //personal information
 type PersonalInfo = {
@@ -599,14 +601,21 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                 </div>
 
 
-
                 {/*submit button*/}
-                <button
-                    type="submit"
-                    className="bg-blue-500 text-white px-4 py-2 rounded"
-                >
-                Submit
-                </button>
+                <div className='flex justify-end mt-6'>
+                    <button
+                        type="submit"
+                        className="relative bg-blue-500 text-white px-4 py-2 rounded-xl overflow-hidden group"
+                        >
+        
+                        <span className="absolute -inset-2 -rotate-3 transform bg-gradient-to-br from-blue-500 to-cyan-400 rounded-lg blur-[1px] opacity-80 group-hover:opacity-100 transition-opacity"></span>
+                        <div className='flex items-center gap-2'>
+                            <span className="relative z-10 text-xl">Generate</span>
+                            <FaWandMagicSparkles className='relative z-10' />
+                        </div>
+                    </button>
+                </div>
+                
             </form>   
         </div>
     );
