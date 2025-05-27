@@ -341,7 +341,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                     <div className="space-y-4">
                         <h2 className="text-lg font-semibold">Education</h2>
                         {education.map((edu, eduIndex) => (
-                            <div key={eduIndex} className="space-y-2 relative">
+                            <div key={eduIndex} className="space-y-2 p-4 rounded bg-slate-900 relative">
                                 <button
                                     type="button"
                                     onClick={() => {
@@ -447,7 +447,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                     <div className="space-y-4">
                         <h2 className="text-lg font-semibold">Experience</h2>
                         {experiences.map((exp, expIndex) => (
-                            <div key={expIndex} className="space-y-2 border p-4 rounded bg-gray-50 relative">
+                            <div key={expIndex} className="space-y-2 p-4 rounded bg-slate-900 relative">
                                 <button
                                     type="button"
                                     onClick={() => {
@@ -513,7 +513,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                     <div className="space-y-4">
                         <h2 className="text-lg font-semibold">Projects</h2>
                         {projects.map((proj, projIndex) => (
-                            <div key={projIndex} className="space-y-2 border p-4 rounded bg-gray-50 relative">
+                            <div key={projIndex} className="space-y-2 p-4 rounded bg-slate-900 relative">
                                 <button
                                     type="button"
                                     onClick={() => {
