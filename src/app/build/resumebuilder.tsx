@@ -48,8 +48,9 @@ export default function ResumeBuilder() {
       const pdfBlob = await compileRes.blob();
       const pdfUrl = URL.createObjectURL(pdfBlob);
       setPdfUrl(pdfUrl);
+      console.log(pdfUrl)
 
-      router.push("/result");
+      router.push(`/result?url=${encodeURIComponent(pdfUrl)}`);
 
 
     } catch (err) {

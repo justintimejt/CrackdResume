@@ -9,79 +9,15 @@ import { FaFilePdf, FaFileCode } from "react-icons/fa";
 export default function ResultPage () {
     const searchParams = useSearchParams();
     const id = searchParams.get('id');
-    const [latex, setLatex] = useState('');
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
     const [pdfUrl, setPdfUrl] = useState<string | null>(null);
 
     useEffect(() => {
-        if (!id) {
-          setError('Missing resume ID');
-          setLoading(false);
-          return;
-        }
+        const urlParam = searchParams.get("url");
+        if (urlParam) setPdfUrl(decodeURIComponent(urlParam));
+    }, [searchParams]);
 
-        const fetchResumeData = async() => {
-            try {
-                const texRes = await fetch(`/api/tex?id=${id}`);
-                if (!texRes.ok) throw new Error('Failed to fetch LaTeX');
-                const latexContent = await texRes.text();
-                setLatex(latexContent);
+    if (!pdfUrl) return <p>No PDF URL provided.</p>;
 
-                const compileRes = await fetch('/api/compile-pdf-online', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ latex: latexContent }),
-                  });
-          
-                  if (!compileRes.ok) {
-                    const errorData = await compileRes.json();
-                    throw new Error(errorData.error || 'PDF compilation failed');
-                  }
-          
-                  // Create blob URL for the PDF
-                  const pdfBlob = await compileRes.blob();
-                  const url = URL.createObjectURL(pdfBlob);
-                  setPdfUrl(url);
-            } catch (err) {
-                console.error('Error:', err);
-                setError(err instanceof Error ? err.message : 'Unknown error');
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchResumeData();
-
-        return () => {
-            if (pdfUrl) {
-                URL.revokeObjectURL(pdfUrl);
-            }
-        };
-    }, [id]);
-
-
-    //local pdflatex implementation
-    // const pdfUrl = `/api/get-pdf?id=${id}`;
-    // const texUrl = `/api/tex?id=${id}`;
-
-    // useEffect(() => {
-    //     const fetchLatex = async () => {
-    //         try {
-    //             const res = await fetch(texUrl);
-    //             setLatex(await res.text());
-    //         } catch(err) {
-    //             console.error('Failed to fetch LaTeX:', err);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     };
-    //     fetchLatex();
-    // }, [id, texUrl]);
-
-    // if (loading) return <div>Loading preview...</div>;
 
     return (
         <div className ='bg-black min-h-screen'>
@@ -110,13 +46,13 @@ export default function ResultPage () {
                         </button>
                         
                     </a>
-                    <a href={`data:text/plain;charset=utf-8,${encodeURIComponent(latex)}`} download="resume.tex">
+                    {/* <a href={`data:text/plain;charset=utf-8,${encodeURIComponent(latex)}`} download="resume.tex">
                         <button className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:from-blue-500 hover:to-cyan-500 flex items-center gap-2">
                             Download Latex
                             <FaFileCode className="h-5 w-5 opacity-90" />
                         </button>
                         
-                    </a>
+                    </a> */}
                 </div>
             </div>
             
