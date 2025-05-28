@@ -4,12 +4,16 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { FaFilePdf, FaFileCode } from "react-icons/fa";
 import { Buffer } from "buffer";
+import { db } from "@/lib/firebase";
+import { doc, getDoc } from 'firebase/firestore';
+
+
+
 
 
 
 export default function ResultPage () {
     const searchParams = useSearchParams();
-    // const id = searchParams.get('id');
     const [pdfUrl, setPdfUrl] = useState<string | null>(null);
     const [latex, setLatex] = useState<string>('');
 
@@ -22,16 +26,42 @@ export default function ResultPage () {
       ? `data:application/x-tex;base64,${utf8ToBase64(latex)}`
       : null;
 
-
     useEffect(() => {
-        const urlParam = searchParams.get("url");
-        // const latexParam = searchParams.get("latex");
-        if (urlParam) setPdfUrl(decodeURIComponent(urlParam));
-        // if (latexParam) setLatex(decodeURIComponent(latexParam));
-
+        const id = searchParams.get("id");
+        if (!id) return;
+      
+        const fetchUrls = async () => {
+            try {
+              const docRef = doc(db, 'resumes', id);
+              const docSnap = await getDoc(docRef);
+      
+              if (docSnap.exists()) {
+                const data = docSnap.data();
+                setPdfUrl(data.pdfUrl);
+                setLatex(data.latex);
+              } else {
+                console.error('No such document!');
+              }
+            } catch (error) {
+              console.error('Error fetching resume:', error);
+            }
+          };
+    
+        fetchUrls();
     }, [searchParams]);
+      
 
-    if (!pdfUrl) return <p>No PDF URL provided.</p>;
+    // useEffect(() => {
+    //     const id = searchParams.get("id");
+    //     if (!id) return;
+    //     // const urlParam = searchParams.get("url");
+    //     // const latexParam = searchParams.get("latex");
+    //     // if (urlParam) setPdfUrl(decodeURIComponent(urlParam));
+    //     // if (latexParam) setLatex(decodeURIComponent(latexParam));
+
+    // }, [searchParams]);
+
+    // if (!pdfUrl) return <p>No PDF URL provided.</p>;
 
 
     return (

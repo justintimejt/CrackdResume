@@ -1,9 +1,22 @@
 import { NextResponse } from 'next/server';
+import { initializeApp, cert, getApps } from 'firebase-admin/app';
+import { getStorage } from 'firebase-admin/storage';
+import { getFirestore } from 'firebase-admin/firestore';
+import { v4 as uuidv4 } from 'uuid';
 
-// interface LatexOnlineRequest {
-//     code: string;
-//     format: 'pdf';
-// }
+if (!getApps().length) {
+    initializeApp({
+      credential: cert({
+        projectId: process.env.FIREBASE_PROJECT_ID,
+        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+        privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+      }),
+      storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+    });
+  }
+  
+  const bucket = getStorage().bucket();
+  const db = getFirestore();
 
 export async function POST(req: Request) {
     //debug
@@ -23,13 +36,8 @@ export async function POST(req: Request) {
         //debug
         console.log('Sending LaTeX to LaTeX.Online API...');
 
-        // const latexOnlineRequest: LatexOnlineRequest = {
-        //     code: latex,
-        //     format: 'pdf'
-        // };
 
         const encodedLatex = encodeURIComponent(latex);
-
         const apiUrl = `https://latexonline.cc/compile?text=${encodedLatex}`;
 
         //call latex.online api
@@ -75,36 +83,44 @@ export async function POST(req: Request) {
       
         console.log(`PDF successfully compiled, size: ${pdfBuffer.byteLength} bytes`);
 
-        // Return pdf as response
-        return new NextResponse(pdfBuffer, {
-            status: 200,
-            headers: {
-            'Content-Type': 'application/pdf',
-            'Content-Disposition': 'inline; filename="document.pdf"',
-            'Content-Length': pdfBuffer.byteLength.toString(),
-            
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'POST',
-            'Access-Control-Allow-Headers': 'Content-Type',
-            },
-        });
+        //upload pdf and latex to firebase storage
+        const id = uuidv4();
+        const pdfFile = bucket.file(`resumes/${id}.pdf`);
+        const texFile = bucket.file(`resumes/${id}.tex`);
 
+        await Promise.all([
+            pdfFile.save(Buffer.from(pdfBuffer), {
+              contentType: 'application/pdf',
+              metadata: { firebaseStorageDownloadTokens: id },
+            }),
+            texFile.save(Buffer.from(latex), {
+              contentType: 'text/plain',
+              metadata: { firebaseStorageDownloadTokens: id },
+            }),
+          ]);
+        
+        const bucketName = process.env.FIREBASE_STORAGE_BUCKET!;
+        const encodedPath = encodeURIComponent(`resumes/${id}.pdf`);
+        const encodedTexPath = encodeURIComponent(`resumes/${id}.tex`);
+
+        const pdfUrl = `https://firebasestorage.googleapis.com/v0/b/${bucketName}/o/${encodedPath}?alt=media&token=${id}`;
+        const texUrl = `https://firebasestorage.googleapis.com/v0/b/${bucketName}/o/${encodedTexPath}?alt=media&token=${id}`;
+
+        //store metadata in firestore
+        await db.collection('resumes').doc(id).set({
+            createdAt: new Date(),
+            pdfUrl,
+            texUrl,
+        });
+      
+        return NextResponse.json({ pdfUrl, texUrl, id }, { status: 200 });
 
 
     } catch (error) {
-        console.error("PDF Compilation Error:", error);
-        
-        // Handle network errors specifically
-        if (error instanceof TypeError && error.message.includes('fetch')) {
-          return NextResponse.json({
-            error: "Failed to connect to LaTeX.Online service",
-            details: "Network error or service unavailable"
-          }, { status: 503 });
-        }
-    
-        return NextResponse.json({
-          error: "Failed to compile PDF", 
-          details: error instanceof Error ? error.message : 'Unknown error'
-        }, { status: 500 });
-      }
-    }
+      console.error("PDF Compilation Error:", error);
+      return NextResponse.json({
+        error: "Failed to compile or store PDF",
+        details: error instanceof Error ? error.message : "Unknown error"
+    }, { status: 500 });
+  }
+}
