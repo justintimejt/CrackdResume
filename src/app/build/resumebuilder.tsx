@@ -47,6 +47,7 @@ export default function ResumeBuilder() {
 
       const pdfBlob = await compileRes.blob();
       const pdfUrl = URL.createObjectURL(pdfBlob);
+      // const encodedLatex = encodeURIComponent(latex);
       setPdfUrl(pdfUrl);
       console.log(pdfUrl)
 

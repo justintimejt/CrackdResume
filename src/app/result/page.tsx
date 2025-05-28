@@ -8,12 +8,17 @@ import { FaFilePdf, FaFileCode } from "react-icons/fa";
 
 export default function ResultPage () {
     const searchParams = useSearchParams();
-    const id = searchParams.get('id');
+    // const id = searchParams.get('id');
     const [pdfUrl, setPdfUrl] = useState<string | null>(null);
+    // const [latex, setLatex] = useState<string>('');
+
 
     useEffect(() => {
         const urlParam = searchParams.get("url");
+        // const latexParam = searchParams.get("latex");
         if (urlParam) setPdfUrl(decodeURIComponent(urlParam));
+        // if (latexParam) setLatex(decodeURIComponent(latexParam));
+
     }, [searchParams]);
 
     if (!pdfUrl) return <p>No PDF URL provided.</p>;
