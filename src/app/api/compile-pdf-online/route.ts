@@ -87,5 +87,20 @@ export async function POST(req: Request) {
 
 
 
+    } catch (error) {
+        console.error("PDF Compilation Error:", error);
+        
+        // Handle network errors specifically
+        if (error instanceof TypeError && error.message.includes('fetch')) {
+          return NextResponse.json({
+            error: "Failed to connect to LaTeX.Online service",
+            details: "Network error or service unavailable"
+          }, { status: 503 });
+        }
+    
+        return NextResponse.json({
+          error: "Failed to compile PDF", 
+          details: error instanceof Error ? error.message : 'Unknown error'
+        }, { status: 500 });
+      }
     }
-}
