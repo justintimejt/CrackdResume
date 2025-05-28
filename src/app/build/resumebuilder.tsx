@@ -29,6 +29,7 @@ export default function ResumeBuilder() {
     setError(null);
 
     try {
+      //compile and upload pdf + tex to firebase, get the urls back for tex + pdf
       const compileRes = await fetch("/api/compile-pdf-online", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -40,17 +41,17 @@ export default function ResumeBuilder() {
         throw new Error(`HTTP error! status: ${compileRes.status}`);
       }
 
-      // const { id } = await compileRes.json();
-      // console.log("Navigation triggered to:", `/result?id=${id}`);
-      // router.push(`/result?id=${id}`);
-      // console.log("Navigation triggered to:", `/result?id=${id}`);
+      const { pdfUrl, texUrl } = await compileRes.json();
 
-      const pdfBlob = await compileRes.blob();
-      const pdfUrl = URL.createObjectURL(pdfBlob);
-      // const encodedLatex = encodeURIComponent(latex);
+      if (!pdfUrl || !texUrl) {
+        throw new Error("Missing PDF or TeX URL in response");
+      }
+
       setPdfUrl(pdfUrl);
-      console.log(pdfUrl)
+      console.log("PDF URL:", pdfUrl);
+      console.log("TeX URL:", texUrl);
 
+      //navigate to result page with pdf url
       router.push(`/result?url=${encodeURIComponent(pdfUrl)}`);
 
 
