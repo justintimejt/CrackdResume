@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { FaFilePdf, FaFileCode } from "react-icons/fa";
+import { Buffer } from "buffer";
 
 
 
@@ -10,7 +11,16 @@ export default function ResultPage () {
     const searchParams = useSearchParams();
     // const id = searchParams.get('id');
     const [pdfUrl, setPdfUrl] = useState<string | null>(null);
-    // const [latex, setLatex] = useState<string>('');
+    const [latex, setLatex] = useState<string>('');
+
+    //edit in overleaf logic
+    function utf8ToBase64(str: string) {
+        return btoa(unescape(encodeURIComponent(str)));
+      }
+
+    const base64Tex = latex
+      ? `data:application/x-tex;base64,${utf8ToBase64(latex)}`
+      : null;
 
 
     useEffect(() => {
@@ -51,6 +61,19 @@ export default function ResultPage () {
                         </button>
                         
                     </a>
+                    {base64Tex && (
+                        <a
+                            href={`https://www.overleaf.com/docs?snip_uri=${encodeURIComponent(
+                                base64Tex
+                            )}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <button className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700">
+                                Edit in Overleaf
+                            </button>
+                        </a>
+                    )}
                     {/* <a href={`data:text/plain;charset=utf-8,${encodeURIComponent(latex)}`} download="resume.tex">
                         <button className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:from-blue-500 hover:to-cyan-500 flex items-center gap-2">
                             Download Latex
