@@ -1,22 +1,8 @@
 import { NextResponse } from 'next/server';
-import { initializeApp, cert, getApps } from 'firebase-admin/app';
-import { getStorage } from 'firebase-admin/storage';
-import { getFirestore } from 'firebase-admin/firestore';
+import supabase from '@/lib/supabase-admin';
 import { v4 as uuidv4 } from 'uuid';
 
-if (!getApps().length) {
-    initializeApp({
-      credential: cert({
-        projectId: process.env.FIREBASE_PROJECT_ID,
-        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-        privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-      }),
-      storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-    });
-  }
-  
-  const bucket = getStorage().bucket();
-  const db = getFirestore();
+
 
 export async function POST(req: Request) {
     //debug
@@ -83,38 +69,52 @@ export async function POST(req: Request) {
       
         console.log(`PDF successfully compiled, size: ${pdfBuffer.byteLength} bytes`);
 
-        //upload pdf and latex to firebase storage
+        //upload pdf and latex to supabase storage
         const id = uuidv4();
-        const pdfFile = bucket.file(`resumes/${id}.pdf`);
-        const texFile = bucket.file(`resumes/${id}.tex`);
+        const folder = `resumes/${id}`;
+        const pdfPath = `${folder}/resume.pdf`
+        const texPath = `${folder}/resume.tex`
 
-        await Promise.all([
-            pdfFile.save(Buffer.from(pdfBuffer), {
-              contentType: 'application/pdf',
-              metadata: { firebaseStorageDownloadTokens: id },
-            }),
-            texFile.save(Buffer.from(latex), {
-              contentType: 'text/plain',
-              metadata: { firebaseStorageDownloadTokens: id },
-            }),
-          ]);
+        const [{ error: pdfError }, { error: texError }] = await Promise.all([
+          supabase.storage.from('resumes').upload(pdfPath, pdfBuffer, {
+            contentType: 'application/pdf',
+            upsert: true,
+          }),
+          supabase.storage.from('resumes').upload(texPath, latex, {
+            contentType: 'text/plain',
+            upsert: true,
+          }),
+        ]);
+
+        if (pdfError || texError) {
+          console.error('Supabase Upload Error:', pdfError || texError);
+          return NextResponse.json({ error: "Upload to Supabase failed" }, { status: 500 });
+        }
         
-        const bucketName = process.env.FIREBASE_STORAGE_BUCKET!;
-        const encodedPath = encodeURIComponent(`resumes/${id}.pdf`);
-        const encodedTexPath = encodeURIComponent(`resumes/${id}.tex`);
+        const bucket = 'resumes';
+        const baseUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${bucket}`;
+        const pdfUrl = `${baseUrl}/${pdfPath}`;
+        const texUrl = `${baseUrl}/${texPath}`;
 
-        const pdfUrl = `https://firebasestorage.googleapis.com/v0/b/${bucketName}/o/${encodedPath}?alt=media&token=${id}`;
-        const texUrl = `https://firebasestorage.googleapis.com/v0/b/${bucketName}/o/${encodedTexPath}?alt=media&token=${id}`;
+  
+        //store metadata in Supabase DB (table: resumes)
+        const { error: insertError } = await supabase
+          .from('resumes')
+          .insert([
+            {
+              id,
+              created_at: new Date().toISOString(),
+              pdf_url: pdfUrl,
+              tex_url: texUrl,
+            },
+          ]);
 
-        //store metadata in firestore
-        await db.collection('resumes').doc(id).set({
-            createdAt: new Date(),
-            pdfUrl,
-            texUrl,
-        });
+        if (insertError) {
+          console.error('Database insert error:', insertError);
+          return NextResponse.json({ error: "Failed to store metadata" }, { status: 500 });
+        }
       
         return NextResponse.json({ pdfUrl, texUrl, id }, { status: 200 });
-
 
     } catch (error) {
       console.error("PDF Compilation Error:", error);
