@@ -59,7 +59,10 @@ export async function POST(req: Request) {
             });
         }
 
-        const pdfBuffer = await response.arrayBuffer();
+        const pdfArrayBuffer = await response.arrayBuffer();
+        const pdfBuffer = Buffer.from(pdfArrayBuffer); // convert ArrayBuffer to Buffer
+        
+        const latexBuffer = new TextEncoder().encode(latex); // convert string to Uint8Array
 
         if (!pdfBuffer || pdfBuffer.byteLength === 0) {
             return NextResponse.json({
@@ -90,37 +93,41 @@ export async function POST(req: Request) {
           console.error('Supabase Upload Error:', pdfError || texError);
           return NextResponse.json({ error: "Upload to Supabase failed" }, { status: 500 });
         }
-        
-        const bucket = 'resumes';
-        const baseUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${bucket}`;
-        const pdfUrl = `${baseUrl}/${pdfPath}`;
-        const texUrl = `${baseUrl}/${texPath}`;
 
-  
-        //store metadata in Supabase DB (table: resumes)
+        //get public urls for uploaded files
+        const { data: pdfUrlData } = supabase.storage.from('resumes').getPublicUrl(pdfPath);
+        const { data: texUrlData } = supabase.storage.from('resumes').getPublicUrl(texPath);
+
+        
+        //store metadata in Supabase database (table: resumes)
         const { error: insertError } = await supabase
-          .from('resumes')
-          .insert([
-            {
-              id,
-              created_at: new Date().toISOString(),
-              pdf_url: pdfUrl,
-              tex_url: texUrl,
-            },
-          ]);
+        .from('resumes')
+        .insert([
+          {
+            id,
+            created_at: new Date().toISOString(),
+            pdf_url: pdfUrlData.publicUrl,
+            tex_url: texUrlData.publicUrl,
+          },
+        ]);
 
         if (insertError) {
           console.error('Database insert error:', insertError);
           return NextResponse.json({ error: "Failed to store metadata" }, { status: 500 });
         }
-      
-        return NextResponse.json({ pdfUrl, texUrl, id }, { status: 200 });
 
-    } catch (error) {
-      console.error("PDF Compilation Error:", error);
-      return NextResponse.json({
-        error: "Failed to compile or store PDF",
-        details: error instanceof Error ? error.message : "Unknown error"
-    }, { status: 500 });
-  }
+        // return URLs and id
+        return NextResponse.json({
+          id,
+          pdfUrl: pdfUrlData.publicUrl,
+          texUrl: texUrlData.publicUrl,
+        }, { status: 200 });
+
+      } catch (error) {
+        console.error("PDF Compilation Error:", error);
+        return NextResponse.json({
+          error: "Failed to compile or store PDF",
+          details: error instanceof Error ? error.message : "Unknown error",
+        }, { status: 500 });
+    }
 }
