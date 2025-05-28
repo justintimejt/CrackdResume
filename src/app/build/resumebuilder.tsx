@@ -29,7 +29,7 @@ export default function ResumeBuilder() {
     setError(null);
 
     try {
-      //compile and upload pdf + tex to firebase, get the urls back for tex + pdf
+      //compile and upload pdf + tex to supabase, get the urls back for tex + pdf
       const compileRes = await fetch("/api/compile-pdf-online", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
