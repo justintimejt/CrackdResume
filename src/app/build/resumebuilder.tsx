@@ -13,6 +13,8 @@ export default function ResumeBuilder() {
   }>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [pdfUrl, setPdfUrl] = useState<string | null>(null); 
+
 
   const router = useRouter();
 
@@ -27,24 +29,32 @@ export default function ResumeBuilder() {
     setError(null);
 
     try {
-      const compileRes = await fetch("/api/compile-pdf", {
+      const compileRes = await fetch("/api/compile-pdf-online", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ latex }),
       });
 
       if (!compileRes.ok) {
+        const errorData = await compileRes.json();
         throw new Error(`HTTP error! status: ${compileRes.status}`);
       }
 
-      const { id } = await compileRes.json();
-      console.log("Navigation triggered to:", `/result?id=${id}`);
-      router.push(`/result?id=${id}`);
-      console.log("Navigation triggered to:", `/result?id=${id}`);
+      // const { id } = await compileRes.json();
+      // console.log("Navigation triggered to:", `/result?id=${id}`);
+      // router.push(`/result?id=${id}`);
+      // console.log("Navigation triggered to:", `/result?id=${id}`);
+
+      const pdfBlob = await compileRes.blob();
+      const pdfUrl = URL.createObjectURL(pdfBlob);
+      setPdfUrl(pdfUrl);
+
+      router.push("/result");
+
 
     } catch (err) {
       console.error("PDF compilation failed:", err);
-      router.push("/build");
+       setError(err instanceof Error ? err.message : "PDF compilation failed");
     } finally {
       setLoading(false);
     }

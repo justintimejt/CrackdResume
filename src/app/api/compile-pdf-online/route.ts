@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 
-interface LatexOnlineRequest {
-    code: string;
-    format: 'pdf';
-}
+// interface LatexOnlineRequest {
+//     code: string;
+//     format: 'pdf';
+// }
 
 export async function POST(req: Request) {
     //debug
@@ -23,18 +23,22 @@ export async function POST(req: Request) {
         //debug
         console.log('Sending LaTeX to LaTeX.Online API...');
 
-        const latexOnlineRequest: LatexOnlineRequest = {
-            code: latex,
-            format: 'pdf'
-        };
+        // const latexOnlineRequest: LatexOnlineRequest = {
+        //     code: latex,
+        //     format: 'pdf'
+        // };
+
+        const encodedLatex = encodeURIComponent(latex);
+
+        const apiUrl = `https://latexonline.cc/compile?text=${encodedLatex}`;
 
         //call latex.online api
-        const response = await fetch('https://latex.online/compile', {
-            method: 'POST',
+        const response = await fetch(apiUrl, {
+            method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
+                'User-Agent': 'Mozilla/5.0 (compatible; LaTeX-Compiler/1.0)',
             },
-            body: JSON.stringify(latexOnlineRequest)
+            signal: AbortSignal.timeout(30000)
         });
 
         //debug
