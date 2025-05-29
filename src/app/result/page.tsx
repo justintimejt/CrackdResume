@@ -1,12 +1,21 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { FaFilePdf, FaFileCode } from "react-icons/fa";
-import { Buffer } from "buffer";
 import { createClient } from '@supabase/supabase-js';
+import { Worker, Viewer } from '@react-pdf-viewer/core';
+import dynamic from 'next/dynamic';
 
 
+//styles
+import '@react-pdf-viewer/core/lib/styles/index.css';
+import '@react-pdf-viewer/default-layout/lib/styles/index.css';
+
+const PdfViewer = dynamic(
+    () => import('../components/PdfViewer'), // Create a separate component that wraps your Worker and Viewer
+    { ssr: false }
+  );
 
 
 
@@ -15,6 +24,7 @@ export default function ResultPage () {
     const searchParams = useSearchParams();
     const [pdfUrl, setPdfUrl] = useState<string | null>(null);
     const [latex, setLatex] = useState<string>('');
+
 
     //edit in overleaf logic
     function utf8ToBase64(str: string) {
@@ -75,11 +85,12 @@ export default function ResultPage () {
                 </p>
         
                 <div className="w-full max-w-4xl h-[70vh] border shadow-lg">
-                    <iframe 
+                    <PdfViewer pdfUrl ={pdfUrl}/>
+                    {/* <iframe 
                         src={pdfUrl || '#'}
                         className="w-full h-full rounded-md"
                         title="PDF Preview"
-                    />
+                    /> */}
                 </div>
 
                 {/*Download buttons*/}
