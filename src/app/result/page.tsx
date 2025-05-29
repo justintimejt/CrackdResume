@@ -4,8 +4,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { FaFilePdf, FaFileCode } from "react-icons/fa";
 import { Buffer } from "buffer";
-import { db } from "@/lib/firebase";
-import { doc, getDoc } from 'firebase/firestore';
+import { createClient } from '@supabase/supabase-js';
 
 
 
@@ -25,43 +24,44 @@ export default function ResultPage () {
     const base64Tex = latex
       ? `data:application/x-tex;base64,${utf8ToBase64(latex)}`
       : null;
-
-    useEffect(() => {
-        const id = searchParams.get("id");
-        if (!id) return;
-      
-        const fetchUrls = async () => {
-            try {
-              const docRef = doc(db, 'resumes', id);
-              const docSnap = await getDoc(docRef);
-      
-              if (docSnap.exists()) {
-                const data = docSnap.data();
-                setPdfUrl(data.pdfUrl);
-                setLatex(data.latex);
-              } else {
-                console.error('No such document!');
-              }
-            } catch (error) {
-              console.error('Error fetching resume:', error);
-            }
-          };
     
-        fetchUrls();
-    }, [searchParams]);
+    const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
       
+    useEffect(() => {
+    const id = searchParams.get("id");
+    if (!id) return;
+    
+    const fetchResume = async () => {
+        try {
+        const { data, error } = await supabase
+            .from("resumes")
+            .select("pdf_url, tex_url")
+            .eq("id", id)
+            .single();
+    
+        if (error) {
+            console.error("Error fetching resume from Supabase:", error);
+            return;
+        }
+    
+        if (data) {
+            setPdfUrl(data.pdf_url);
+            // Fetch the LaTeX source from the tex_url
+            const texRes = await fetch(data.tex_url);
+            const texText = await texRes.text();
+            setLatex(texText);
+        }
+        } catch (err) {
+            console.error("Unexpected error fetching data:", err);
+        }
+        };
+    
+      fetchResume();
+    }, [searchParams]);
 
-    // useEffect(() => {
-    //     const id = searchParams.get("id");
-    //     if (!id) return;
-    //     // const urlParam = searchParams.get("url");
-    //     // const latexParam = searchParams.get("latex");
-    //     // if (urlParam) setPdfUrl(decodeURIComponent(urlParam));
-    //     // if (latexParam) setLatex(decodeURIComponent(latexParam));
-
-    // }, [searchParams]);
-
-    // if (!pdfUrl) return <p>No PDF URL provided.</p>;
 
 
     return (
