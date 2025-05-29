@@ -41,18 +41,19 @@ export default function ResumeBuilder() {
         throw new Error(`HTTP error! status: ${compileRes.status}`);
       }
 
-      const { pdfUrl, texUrl } = await compileRes.json();
+      const { id, pdfUrl, texUrl } = await compileRes.json();
 
-      if (!pdfUrl || !texUrl) {
+      if (!id || !pdfUrl || !texUrl) {
         throw new Error("Missing PDF or TeX URL in response");
       }
 
       setPdfUrl(pdfUrl);
+      console.log("ID:", id);
       console.log("PDF URL:", pdfUrl);
       console.log("TeX URL:", texUrl);
 
       //navigate to result page with pdf url
-      router.push(`/result?url=${encodeURIComponent(pdfUrl)}`);
+      router.push(`/result?id=${id}`);
 
 
     } catch (err) {

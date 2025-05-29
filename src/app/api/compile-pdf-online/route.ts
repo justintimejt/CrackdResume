@@ -58,19 +58,13 @@ export async function POST(req: Request) {
                 status: response.status >= 500 ? 500 : 400 
             });
         }
-
-        const pdfArrayBuffer = await response.arrayBuffer();
-        const pdfBuffer = Buffer.from(pdfArrayBuffer); // convert ArrayBuffer to Buffer
         
-        const latexBuffer = new TextEncoder().encode(latex); // convert string to Uint8Array
+        //pdf buffer -> blob
+        const pdfArrayBuffer = await response.arrayBuffer();
+        const pdfBuffer = Buffer.from(pdfArrayBuffer);
 
-        if (!pdfBuffer || pdfBuffer.byteLength === 0) {
-            return NextResponse.json({
-              error: "Received empty PDF from LaTeX.Online"
-            }, { status: 500 });
-          }
-      
-        console.log(`PDF successfully compiled, size: ${pdfBuffer.byteLength} bytes`);
+        //latex file blob
+        const latexBuffer = new TextEncoder().encode(latex);
 
         //upload pdf and latex to supabase storage
         const id = uuidv4();
@@ -83,7 +77,7 @@ export async function POST(req: Request) {
             contentType: 'application/pdf',
             upsert: true,
           }),
-          supabase.storage.from('resumes').upload(texPath, latex, {
+          supabase.storage.from('resumes').upload(texPath, latexBuffer, {
             contentType: 'text/plain',
             upsert: true,
           }),

@@ -4,18 +4,6 @@ import { useEffect, useState, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { FaFilePdf, FaFileCode } from "react-icons/fa";
 import { createClient } from '@supabase/supabase-js';
-import { Worker, Viewer } from '@react-pdf-viewer/core';
-import dynamic from 'next/dynamic';
-
-
-//styles
-import '@react-pdf-viewer/core/lib/styles/index.css';
-import '@react-pdf-viewer/default-layout/lib/styles/index.css';
-
-const PdfViewer = dynamic(
-    () => import('../components/PdfViewer'), // Create a separate component that wraps your Worker and Viewer
-    { ssr: false }
-  );
 
 
 
@@ -85,12 +73,11 @@ export default function ResultPage () {
                 </p>
         
                 <div className="w-full max-w-4xl h-[70vh] border shadow-lg">
-                    <PdfViewer pdfUrl ={pdfUrl}/>
-                    {/* <iframe 
+                    <iframe 
                         src={pdfUrl || '#'}
                         className="w-full h-full rounded-md"
                         title="PDF Preview"
-                    /> */}
+                    />
                 </div>
 
                 {/*Download buttons*/}
@@ -115,13 +102,13 @@ export default function ResultPage () {
                             </button>
                         </a>
                     )}
-                    {/* <a href={`data:text/plain;charset=utf-8,${encodeURIComponent(latex)}`} download="resume.tex">
+                    <a href={`data:text/plain;charset=utf-8,${encodeURIComponent(latex)}`} download="resume.tex">
                         <button className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:from-blue-500 hover:to-cyan-500 flex items-center gap-2">
                             Download Latex
                             <FaFileCode className="h-5 w-5 opacity-90" />
                         </button>
                         
-                    </a> */}
+                    </a>
                 </div>
             </div>
             
