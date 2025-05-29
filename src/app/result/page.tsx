@@ -3,6 +3,7 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { FaFilePdf, FaFileCode } from "react-icons/fa";
+import { SiOverleaf } from "react-icons/si";
 import { createClient } from '@supabase/supabase-js';
 
 
@@ -83,9 +84,16 @@ export default function ResultPage () {
                 {/*Download buttons*/}
                 <div className="mt-6 flex flex-wrap gap-4">
                     <a href={pdfUrl || '#'} download="resume.pdf">
-                        <button className="px-8 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:from-cyan-500 hover:to-blue-500 flex items-center gap-2">
+                        <button className="px-8 py-3 bg-gradient-to-r bg-white text-black font-semibold rounded-lg shadow-lg transition-all duration-300 flex items-center gap-2 hover:scale-105 transform hover:shadow-[0_0_20px_rgba(59,130,246,0.6)]">
                             Download PDF
                             <FaFilePdf className="h-5 w-5 opacity-90" />
+                        </button>
+                        
+                    </a>
+                    <a href={`data:text/plain;charset=utf-8,${encodeURIComponent(latex)}`} download="resume.tex">
+                        <button className="px-8 py-3 bg-gradient-to-r bg-white text-black font-semibold rounded-lg shadow-lg transition-all duration-300 flex items-center gap-2 hover:scale-105 transform hover:shadow-[0_0_20px_rgba(59,130,246,0.6)]">
+                            Download Latex
+                            <FaFileCode className="h-5 w-5 opacity-90" />
                         </button>
                         
                     </a>
@@ -97,18 +105,13 @@ export default function ResultPage () {
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            <button className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700">
+                            <button className="flex flex-wrap px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-lg hover:from-blue-500 hover:to-cyan-500 font-semibold items-center gap-2 hover:scale-105 transform hover:shadow-[0_0_20px_rgba(59,130,246,0.6)]">
                                 Edit in Overleaf
+                                <SiOverleaf />
                             </button>
                         </a>
                     )}
-                    <a href={`data:text/plain;charset=utf-8,${encodeURIComponent(latex)}`} download="resume.tex">
-                        <button className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:from-blue-500 hover:to-cyan-500 flex items-center gap-2">
-                            Download Latex
-                            <FaFileCode className="h-5 w-5 opacity-90" />
-                        </button>
-                        
-                    </a>
+                    
                 </div>
             </div>
             
