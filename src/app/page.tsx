@@ -16,10 +16,10 @@ export default function Home() {
           </button>
         </div>
         <div className="flex space-x-6">
-          <button className="relative text-white after:absolute after:left-1/2 after:bottom-0 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-white after:transition-all after:duration-300 hover:after:w-full">
+          <button className="relative text-white after:absolute after:left-1/2 after:bottom-0 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-white after:transition-all after:duration-300 hover:after:w-full font-semibold">
             Source Code
           </button>
-          <button className="text-md text-black bg-white p-2 rounded-md"><a href="/build">Gen Now</a></button>
+          <button className="text-md text-black bg-white p-2 rounded-md hover:bg-gray-300 font-semibold"><a href="/build">Gen Now</a></button>
         </div>
           
       </nav>
@@ -44,7 +44,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-x-6 sm:space-y-0">
             <a
               href="/build"
-              className="bg-white text-black px-6 py-3 rounded-xl shadow hover:bg-gray-100 transition"
+              className="bg-white text-black px-6 py-3 rounded-xl font-semibold shadow hover:bg-gray-300 transition"
             >
               Generate Now
             </a>
@@ -53,7 +53,7 @@ export default function Home() {
               className="bg-transparent border border-white px-6 py-3 rounded-xl text-white hover:bg-white hover:text-black transition"
               target="_blank" rel="noopener noreferrer"
             >
-              <div className="flex space-x-2">
+              <div className="flex space-x-2 font-semibold">
                 <span>Source Code</span>
                 <FaGithub className="text-xl"/>
               </div>
