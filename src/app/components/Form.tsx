@@ -536,7 +536,12 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                 </h2>
                 {/* Personal Info Card */}
                 <div className="rounded shadow">
-                    
+
+                {/*first name container*/}
+                <div className ="mb-4">
+                    <label htmlFor="firstname" className="block text-sm font-medium text-gray-300 mb-1">
+                        First Name <span className="text-red-400">*</span>
+                    </label>
                     <input
                         type="text"
                         name="firstname"
@@ -548,7 +553,13 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                         className={`${getInputClass('firstname', !!errors.firstname && touched.firstname)} mb-2`}
                     />
                     {errors.firstname && touched.firstname && <ErrorMessage message={errors.firstname} />}
-                    
+                </div>
+
+                {/*last name container*/}
+                <div className ="mb-4">
+                    <label htmlFor="lastname" className="block text-sm font-medium text-gray-300 mb-1">
+                        Last Name <span className="text-red-400">*</span>
+                    </label>
                     <input
                         type="text"
                         name="lastname"
@@ -560,7 +571,13 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                         className={`${getInputClass('lastname', !!errors.lastname && touched.lastname)} mb-2`}
                     />
                     {errors.lastname && touched.lastname && <ErrorMessage message={errors.lastname} />}
-    
+                </div>
+
+                {/*email container*/}
+                <div className= "mb-4">
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
+                        Email <span className="text-red-400">*</span>
+                    </label>
                     <input
                         type="email"
                         name="email"
@@ -572,7 +589,13 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                         className={`${getInputClass('email', !!errors.email && touched.email)} `}
                     />
                     {errors.email && touched.email && <ErrorMessage message={errors.email} />}
-
+                </div>
+                    
+                {/*phone number container*/}
+                <div className ="mb-4">
+                    <label htmlFor="phonenumber" className="block text-sm font-medium text-gray-300 mb-1">
+                        Phone Number <span className="text-red-400">*</span>
+                    </label>
                     <input
                         type="text"
                         name="phonenumber"
@@ -584,7 +607,11 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                         className={`${getInputClass('phonenumber', !!errors.phonenumber && touched.phonenumber)} mb-2`}
                     />
                     {errors.phonenumber && touched.phonenumber && <ErrorMessage message={errors.phonenumber} />}
-
+                </div>
+                <div className ="mb-4">
+                    <label htmlFor="phonenumber" className="block text-sm font-medium text-gray-300 mb-1">
+                        LinkedIn (optional)
+                    </label>
                     <input
                         type="text"
                         name="linkedin"
@@ -593,6 +620,11 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                         onChange={handleChange}
                         className={`${inputClass} mb-2`}
                     />
+                </div>
+                <div className ="mb-4">
+                    <label htmlFor="website" className="block text-sm font-medium text-gray-300 mb-1">
+                        Website/Github (optional)
+                    </label>
                     <input
                         type="text"
                         name="website"
@@ -602,6 +634,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                         className={`${inputClass}`}
                     />
                 </div>
+        </div>
 
                 {/* Education and Skills Side by Side */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -641,7 +674,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
 
                                 />
                                 <label className="text-sm font-medium text-gray-700">
-                                    Start Date <span className="text-red-500">*</span>
+                                    Start Date 
                                 </label>
                                 <input
                                     type="date"
@@ -652,7 +685,7 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
 
                                 />
                                 <label className="text-sm font-medium text-gray-700">
-                                    End Date <span className="text-red-500">*</span>
+                                    End Date 
                                 </label>
                                 <input
                                     type="date"
