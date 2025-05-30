@@ -887,10 +887,10 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
                                     <input
                                         type="text"
                                         placeholder="Add technology (press Enter)"
-                                        value={techInputs || ''}
+                                        value={techInputs[projIndex] || ''}
                                         onChange={(e) => handleTechInputChange(projIndex, e.target.value)}
                                         onKeyDown={(e) => handleTechKeyDown(e, projIndex)}
-                                        className={getInputClass(`project${projIndex}`, !!errors[`project${projIndex}`])}
+                                        className={getInputClass(`project_${projIndex}`, !!errors[`project${projIndex}`])}
                                     />
                                     <button
                                         type="button"
