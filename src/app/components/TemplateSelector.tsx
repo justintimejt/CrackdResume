@@ -26,11 +26,11 @@ const TemplateSelector = ({ onSelect }: Props) => {
           image: "/assets/images/jakes-resume.png",
           prompt: templatePrompts["Jake's Resume"]
         },
-        {
-          name: "Modern Deedy",
-          image: "/assets/images/jakes-resume.png",
-          prompt: templatePrompts["Modern Deedy"]
-        },
+        // {
+        //   name: "Modern Deedy",
+        //   image: "/assets/images/jakes-resume.png",
+        //   prompt: templatePrompts["Modern Deedy"]
+        // },
         {
           name: "SWE Resume",
           image: "/assets/images/software-engineer-resume.jpeg",
@@ -49,7 +49,7 @@ const TemplateSelector = ({ onSelect }: Props) => {
             <h1 className=" text-white pb-5 text-xl font-semibold">Choose Resume Template:</h1>
 
             {/*template options*/}
-            <div className="flex flex-col gap-6 md:grid md:grid-cols-3 md:gap-10">
+            <div className="flex flex-col gap-6 md:grid md:grid-cols-2 md:gap-10 max-w-2xl">
                 {templates.map((template, index) => (
                     <button 
                         key={index}
@@ -68,7 +68,7 @@ const TemplateSelector = ({ onSelect }: Props) => {
 
             {/*navigation Buttons*/}
             <div className="flex justify-between pt-6">
-                <button className="border text-white rounded-lg px-4 py-2 flex items-center gap-2 hover:bg-blue-500 hover:text-white transition transform hover:scale-105">
+                <button className="border text-white rounded-lg px-4 py-2 flex items-center gap-2 bg-gradient-to-r from-black to-black hover:from-blue-500 hover:to-cyan-500 hover:text-white transition transform hover:scale-105">
                     <FaArrowLeft />
                     Back to Home
                 </button>
@@ -79,7 +79,7 @@ const TemplateSelector = ({ onSelect }: Props) => {
                     className={`border rounded-lg px-4 py-2 flex items-center gap-2 ${
                         selectedIndex === null
                         ? "text-white opacity-50 cursor-not-allowed"
-                        : "text-white hover:bg-blue-500 hover:text-white transition transform hover:scale-105"
+                        : "text-white bg-gradient-to-r from-black to-black hover:from-blue-500 hover:to-cyan-500 hover:text-white transition transform hover:scale-105"
                     }`}
                 >
                     Next
