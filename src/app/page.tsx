@@ -11,15 +11,15 @@ export default function Home() {
       <nav className ="w-19/20 mx-auto relative top-4 bg-black rounded-3xl shadow-md p-4 z-50 flex justify-between items-center">
 
         <div className="text-lg font-bold text-white">
-          <button className="relative text-white after:absolute after:left-1/2 after:bottom-0 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-white after:transition-all after:duration-300 hover:after:w-full">
-            resumeapp
-          </button>
+          <a href="/">
+            <button className="relative text-white after:absolute after:left-1/2 after:bottom-0 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-white after:transition-all after:duration-300 hover:after:w-full">
+              resumeapp
+            </button>
+          </a>
         </div>
         <div className="flex space-x-6">
-          <button className="relative text-white after:absolute after:left-1/2 after:bottom-0 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-white after:transition-all after:duration-300 hover:after:w-full font-semibold">
-            Source Code
-          </button>
-          <button className="text-md text-black bg-white p-2 rounded-md hover:bg-gray-300 font-semibold"><a href="/build">Gen Now</a></button>
+          <a href="/" className="relative text-white py-2 after:absolute after:left-1/2 after:bottom-0 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-white after:transition-all after:duration-300 hover:after:w-full font-semibold">Source Code</a>
+          <a href="/build" className="text-md text-black bg-white p-2 rounded-md hover:bg-gray-300 font-semibold">Gen Now</a>
         </div>
           
       </nav>
@@ -130,7 +130,7 @@ export default function Home() {
               <div className="text-2xl mb-4">⚡</div>
               <h3 className="text-xl font-semibold mb-3">Lightning-Fast System</h3>
               <p className="text-gray-400">
-                Build and generate industry standard resumes in less than 10 seconds.
+                Build and generate industry standard resumes in less than 60 seconds.
               </p>
             </div>
           </div>
