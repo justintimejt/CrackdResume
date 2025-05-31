@@ -37,7 +37,6 @@ export default function ResumeBuilder() {
       });
 
       if (!compileRes.ok) {
-        const errorData = await compileRes.json();
         throw new Error(`HTTP error! status: ${compileRes.status}`);
       }
 

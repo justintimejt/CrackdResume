@@ -138,8 +138,8 @@ export async function POST(req: Request) {
         // return URLs and id
         return NextResponse.json({
           id,
-          pdfUrl: pdfUrlData.publicUrl,
-          texUrl: texUrlData.publicUrl,
+          pdfUrl: pdfSignedUrl.signedUrl,
+          texUrl: texSignedUrl?.signedUrl,
         }, { status: 200 });
 
       } catch (error) {
