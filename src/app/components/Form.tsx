@@ -408,11 +408,11 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
         }
     };
 
-    const deleteTechnology = (projectIndex: number, techIndex: number) => {
-        const updatedProjects = [...projects];
-        updatedProjects[projectIndex].technologies = updatedProjects[projectIndex].technologies.filter((_, i) => i !== techIndex);
-        setProjects(updatedProjects);
-    };
+    // const deleteTechnology = (projectIndex: number, techIndex: number) => {
+    //     const updatedProjects = [...projects];
+    //     updatedProjects[projectIndex].technologies = updatedProjects[projectIndex].technologies.filter((_, i) => i !== techIndex);
+    //     setProjects(updatedProjects);
+    // };
 
     const handleTechKeyDown = (
         e: React.KeyboardEvent<HTMLInputElement>,
@@ -442,9 +442,6 @@ const Form = ({ selectedTemplate, onComplete, onStartLoading}: Props) => {
             return newErrors;
         });
     };
-
-    {/* Handle Submission*/}
-    const [latexOutput, setLatexOutput] = useState('');
     
 
     //handle form submission

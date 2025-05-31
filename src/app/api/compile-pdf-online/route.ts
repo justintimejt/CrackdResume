@@ -45,7 +45,7 @@ export async function POST(req: Request) {
               const errorText = await response.text();
               errorDetails = errorText;
               console.error('LaTeX.Online error response:', errorText);
-            } catch (e) {
+            } catch {
               console.error('Could not parse error response');
             }
         
@@ -122,16 +122,16 @@ export async function POST(req: Request) {
         // }
 
         //signed urls (private metadata)
-        const { error: insertError } = await supabase
-          .from('resumes')
-          .insert([
-            {
-              id,
-              created_at: new Date().toISOString(),
-              pdf_url: pdfSignedUrl?.signedUrl,
-              tex_url: texSignedUrl?.signedUrl,
-            },
-          ]);
+        // const { error: insertError } = await supabase
+        //   .from('resumes')
+        //   .insert([
+        //     {
+        //       id,
+        //       created_at: new Date().toISOString(),
+        //       pdf_url: pdfSignedUrl?.signedUrl,
+        //       tex_url: texSignedUrl?.signedUrl,
+        //     },
+        //   ]);
 
 
 

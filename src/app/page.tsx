@@ -2,7 +2,8 @@ import Image from "next/image";
 import { FaGithub } from 'react-icons/fa'; // Add this at the top
 import { FaLinkedin } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
-import { IoIosArrowDown } from "react-icons/io";
+import Link from 'next/link';
+
 
 
 export default function Home() {
@@ -11,15 +12,15 @@ export default function Home() {
       <nav className ="w-19/20 mx-auto relative top-4 bg-black rounded-3xl shadow-md p-4 z-50 flex justify-between items-center">
 
         <div className="text-lg font-bold text-white">
-          <a href="/">
+          <Link href="/">
             <button className="relative text-white after:absolute after:left-1/2 after:bottom-0 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-white after:transition-all after:duration-300 hover:after:w-full">
               CrackdResume
             </button>
-          </a>
+          </Link>
         </div>
         <div className="flex space-x-6">
-          <a href="/" className="relative text-white py-2 after:absolute after:left-1/2 after:bottom-0 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-white after:transition-all after:duration-300 hover:after:w-full font-semibold">Source Code</a>
-          <a href="/build" className="text-md text-black bg-white p-2 rounded-md hover:bg-gray-300 font-semibold">Gen Now</a>
+          <Link href="/" className="relative text-white py-2 after:absolute after:left-1/2 after:bottom-0 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-white after:transition-all after:duration-300 hover:after:w-full font-semibold">Source Code</Link>
+          <Link href="/build" className="text-md text-black bg-white p-2 rounded-md hover:bg-gray-300 font-semibold">Gen Now</Link>
         </div>
           
       </nav>
@@ -42,13 +43,13 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-x-6 sm:space-y-0">
-            <a
+            <Link
               href="/build"
               className="bg-white text-black px-6 py-3 rounded-xl font-semibold shadow hover:bg-gray-300 transition"
             >
               Generate Now
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://github.com/yourusername/yourrepo"
               className="bg-transparent border border-white px-6 py-3 rounded-xl text-white hover:bg-white hover:text-black transition"
               target="_blank" rel="noopener noreferrer"
@@ -58,7 +59,7 @@ export default function Home() {
                 <FaGithub className="text-xl"/>
               </div>
               
-            </a>
+            </Link>
           </div>
           
 
@@ -66,7 +67,7 @@ export default function Home() {
             <div className="flex flex-row items-center space-x-6">
               {/* original resume */}
               <div className="bg-gray-800 rounded-2xl border-4 border-dashed border-gray-600 flex items-center justify-center w-96 h-auto">
-                <img 
+                <Image
                   src="../assets/images/jakes-resume.png" 
                   alt="Resume Image" 
                   className="w-full h-full object-cover rounded-xl"
@@ -75,7 +76,7 @@ export default function Home() {
 
               {/* right reflection */}
               <div className="bg-gray-800 rounded-2xl border-4 border-dashed border-gray-700 flex items-center justify-center w-80 h-auto opacity-20 scale-x-[-1]">
-                <img 
+                <Image 
                   src="../assets/images/jakes-resume.png" 
                   alt="Resume Image Reflection" 
                   className="w-full h-full object-cover rounded-xl blur-[1px]"
@@ -140,15 +141,15 @@ export default function Home() {
       <footer className="text-white bg-black border-t border-gray-800 py-6 mt-10 px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="flex space-x-6 text-2xl">
-            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <Link href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
               <FaGithub className="hover:text-gray-400 transition" />
-            </a>
-            <a href="https://x.com/justinpchow?s=21" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+            </Link>
+            <Link href="https://x.com/justinpchow?s=21" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
               <FaXTwitter className="hover:text-gray-400 transition" />
-            </a>
-            <a href="https://www.linkedin.com/in/justin-chow-a74a972b5/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            </Link>
+            <Link href="https://www.linkedin.com/in/justin-chow-a74a972b5/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <FaLinkedin className="hover:text-gray-400 transition" />
-            </a>
+            </Link>
           </div>
           <p className="text-sm text-gray-400">&copy; Justin Chow 2025</p>
         </div>

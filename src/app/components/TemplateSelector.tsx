@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { FaArrowRight } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
 import { templatePrompts } from "../constants/templatePrompts";
+import  Image from "next/image";
 
 type Template = {
     name: string;
@@ -60,7 +61,7 @@ const TemplateSelector = ({ onSelect }: Props) => {
                                 : "hover:ring-1 hover:ring-blue-500"
                         }`}
                     >
-                        <img src={template.image} alt={template.name} className="object-contain rounded-lg" />
+                        <Image src={template.image} alt={template.name} className="object-contain rounded-lg" />
                         <h2 className="text-center font-medium pt-3">{template.name}</h2>
                     </button>
                 ))}

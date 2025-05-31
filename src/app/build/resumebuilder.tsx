@@ -12,8 +12,8 @@ export default function ResumeBuilder() {
     image: string;
   }>(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [pdfUrl, setPdfUrl] = useState<string | null>(null); 
+  // const [error, setError] = useState<string | null>(null);
+  // const [pdfUrl, setPdfUrl] = useState<string | null>(null); 
 
 
   const router = useRouter();
@@ -21,12 +21,12 @@ export default function ResumeBuilder() {
   const handleFormComplete = async (latex: string) => {
     if (latex === "loading") {
       setLoading(true); //render loading screen immediately
-      setError(null);
+
       return;
     }
 
     setLoading(true);
-    setError(null);
+
 
     try {
       //compile and upload pdf + tex to supabase, get the urls back for tex + pdf
@@ -47,7 +47,7 @@ export default function ResumeBuilder() {
         throw new Error("Missing PDF or TeX URL in response");
       }
 
-      setPdfUrl(pdfUrl);
+
       console.log("ID:", id);
       console.log("PDF URL:", pdfUrl);
       console.log("TeX URL:", texUrl);
@@ -58,7 +58,6 @@ export default function ResumeBuilder() {
 
     } catch (err) {
       console.error("PDF compilation failed:", err);
-       setError(err instanceof Error ? err.message : "PDF compilation failed");
     } finally {
       setLoading(false);
     }
