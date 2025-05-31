@@ -13,7 +13,7 @@ export default function Home() {
         <div className="text-lg font-bold text-white">
           <a href="/">
             <button className="relative text-white after:absolute after:left-1/2 after:bottom-0 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-white after:transition-all after:duration-300 hover:after:w-full">
-              resumeapp
+              CrackdResume
             </button>
           </a>
         </div>
@@ -60,30 +60,30 @@ export default function Home() {
               
             </a>
           </div>
-          {/* form -> resume visual*/}
-          <div className="flex justify-center items-center my-24 space-x-8 md:space-x-16">
-            
-            {/* form placeholder */}
-            <div className="flex flex-col items-center">
-              <div className="w-48 h-48 md:w-64 md:h-64 bg-gray-800 rounded-2xl border-4 border-dashed border-gray-600 flex items-center justify-center">
-                  {/* insert component */}
+          
+
+          <div className="flex items-center justify-center mt-10">
+            <div className="flex flex-row items-center space-x-6">
+              {/* original resume */}
+              <div className="bg-gray-800 rounded-2xl border-4 border-dashed border-gray-600 flex items-center justify-center w-96 h-auto">
+                <img 
+                  src="../assets/images/jakes-resume.png" 
+                  alt="Resume Image" 
+                  className="w-full h-full object-cover rounded-xl"
+                />
               </div>
-            </div>
 
-             {/* arrow */}
-            <div className="text-gray-500">
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-              </svg>
-            </div>
-
-            {/* resume placeholder*/}
-            <div className="flex flex-col items-center">
-              <div className="w-48 h-48 md:w-64 md:h-64 bg-gray-800 rounded-2xl border-4 border-dashed border-gray-600 flex items-center justify-center">
-                {/* insert component */}
+              {/* right reflection */}
+              <div className="bg-gray-800 rounded-2xl border-4 border-dashed border-gray-700 flex items-center justify-center w-80 h-auto opacity-20 scale-x-[-1]">
+                <img 
+                  src="../assets/images/jakes-resume.png" 
+                  alt="Resume Image Reflection" 
+                  className="w-full h-full object-cover rounded-xl blur-[1px]"
+                />
               </div>
             </div>
           </div>
+    
 
           {/* optional arrow */}
           {/* <div className='flex items-center justify-center'>
