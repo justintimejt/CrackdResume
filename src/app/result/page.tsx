@@ -14,6 +14,8 @@ export default function ResultPage () {
     const [pdfUrl, setPdfUrl] = useState<string | null>(null);
     const [latex, setLatex] = useState<string>('');
 
+    const id = searchParams.get("id");
+
 
     //edit in overleaf logic
     function utf8ToBase64(str: string) {
@@ -30,7 +32,6 @@ export default function ResultPage () {
     );
       
     useEffect(() => {
-    const id = searchParams.get("id");
     if (!id) return;
     
     const fetchResume = async () => {
@@ -59,7 +60,7 @@ export default function ResultPage () {
         };
     
       fetchResume();
-    }, [searchParams]);
+    }, [id]);
 
 
 
