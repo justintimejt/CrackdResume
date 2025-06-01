@@ -1,15 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { FaFilePdf, FaFileCode } from "react-icons/fa";
 import { SiOverleaf } from "react-icons/si";
 import { createClient } from '@supabase/supabase-js';
+import LoadingPage from '../components/LoadScreen';
 
 
 
-
-export default function ResultPage () {
+//seperate component that uses useSearchParams
+function ResultContent () {
     const searchParams = useSearchParams();
     const [pdfUrl, setPdfUrl] = useState<string | null>(null);
     const [latex, setLatex] = useState<string>('');
@@ -119,3 +120,11 @@ export default function ResultPage () {
         </div>
     );
 };
+
+export default function ResultPage() {
+    return (
+        <Suspense fallback={<LoadingPage/>}>
+            <ResultContent />
+        </Suspense>
+    );
+}
