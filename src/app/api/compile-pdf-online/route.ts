@@ -100,8 +100,8 @@ export async function POST(req: Request) {
         }
 
         //get public urls for uploaded files
-        const { data: pdfUrlData } = supabase.storage.from('resumes').getPublicUrl(pdfPath);
-        const { data: texUrlData } = supabase.storage.from('resumes').getPublicUrl(texPath);
+        // const { data: pdfUrlData } = supabase.storage.from('resumes').getPublicUrl(pdfPath);
+        // const { data: texUrlData } = supabase.storage.from('resumes').getPublicUrl(texPath);
 
         
         //store metadata in Supabase database (table: resumes) public
@@ -122,23 +122,28 @@ export async function POST(req: Request) {
         // }
 
         //signed urls (private metadata)
-        // const { error: insertError } = await supabase
-        //   .from('resumes')
-        //   .insert([
-        //     {
-        //       id,
-        //       created_at: new Date().toISOString(),
-        //       pdf_url: pdfSignedUrl?.signedUrl,
-        //       tex_url: texSignedUrl?.signedUrl,
-        //     },
-        //   ]);
+        const { error: insertError } = await supabase
+          .from('resumes')
+          .insert([
+            {
+              id,
+              created_at: new Date().toISOString(),
+              pdf_url: pdfSignedUrl?.signedUrl,
+              tex_url: texSignedUrl?.signedUrl,
+            },
+          ]);
+
+        if (insertError) {
+            console.error('Database insert error:', insertError);
+            return NextResponse.json({ error: "Failed to store metadata" }, { status: 500 });
+          }
 
 
 
         // return URLs and id
         return NextResponse.json({
           id,
-          pdfUrl: pdfSignedUrl.signedUrl,
+          pdfUrl: pdfSignedUrl?.signedUrl,
           texUrl: texSignedUrl?.signedUrl,
         }, { status: 200 });
 

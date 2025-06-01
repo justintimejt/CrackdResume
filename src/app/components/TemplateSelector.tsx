@@ -61,7 +61,12 @@ const TemplateSelector = ({ onSelect }: Props) => {
                                 : "hover:ring-1 hover:ring-blue-500"
                         }`}
                     >
-                        <Image src={template.image} alt={template.name} className="object-contain rounded-lg" />
+                        <Image 
+                        src={template.image} 
+                        alt={template.name} 
+                        width = {384}
+                        height = {540}
+                        className="object-contain rounded-lg" />
                         <h2 className="text-center font-medium pt-3">{template.name}</h2>
                     </button>
                 ))}

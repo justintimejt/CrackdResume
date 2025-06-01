@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 
 
+
 export default function Home() {
   return (
     <div className="bg-black min-h-screen">
@@ -68,8 +69,10 @@ export default function Home() {
               {/* original resume */}
               <div className="bg-gray-800 rounded-2xl border-4 border-dashed border-gray-600 flex items-center justify-center w-96 h-auto">
                 <Image
-                  src="../assets/images/jakes-resume.png" 
+                  src="/assets/images/jakes-resume.png"
                   alt="Resume Image" 
+                  width = {384}
+                  height = {540}
                   className="w-full h-full object-cover rounded-xl"
                 />
               </div>
@@ -77,8 +80,10 @@ export default function Home() {
               {/* right reflection */}
               <div className="bg-gray-800 rounded-2xl border-4 border-dashed border-gray-700 flex items-center justify-center w-80 h-auto opacity-20 scale-x-[-1]">
                 <Image 
-                  src="../assets/images/jakes-resume.png" 
+                  src="/assets/images/jakes-resume.png"
                   alt="Resume Image Reflection" 
+                  width = {384}
+                  height = {540}
                   className="w-full h-full object-cover rounded-xl blur-[1px]"
                 />
               </div>
