@@ -127,7 +127,18 @@ export const templatePrompts = {
     - DO NOT GENERATE ANY NON-LATEX TEXT.
     - EVERY SECTION MUST MIRROR THE EXAMPLES ABOVE EXACTLY.
     - IF THE INPUT INCLUDES ANY DOT JOTS, REMOVE THEM
-    - CONVERT ALL DATES INTO THIS EXACT FORMAT: MONTH YEAR (IF THE THE MONTH AND YEAR OF THE END DATE IS THE CURRENT MONTH AND YEAR IN REAL TIME REPLACE THE DATE WITH "Present" NO QUOTATIONS AS END DATE)`
+    - CONVERT ALL DATES INTO THIS EXACT FORMAT: MONTH YEAR (IF THE THE MONTH AND YEAR OF THE END DATE IS THE CURRENT MONTH AND YEAR IN REAL TIME REPLACE THE DATE WITH "Present" NO QUOTATIONS AS END DATE)
+    - Separate project and experience descriptions into clear bullet points, each highlighting a single task, responsibility, or achievement.
+    Capitalize the first letter of the following:
+      First and last names (e.g., "john doe" → "John Doe")
+      Locations and place names (e.g., "waterloo, ontario")
+      Dates and months (e.g., "january 2024")
+      Technologies and programming languages (e.g., "react, python")
+      Skills and tools (e.g., "data analysis, machine learning")
+      School names and degrees (e.g., "university of waterloo", "bachelor of science")
+      Job titles and company names (e.g., "software engineer", "google")
+      The first word of every bullet point or sentence
+`
     ,
     // "Modern Deedy":
     // `
@@ -415,5 +426,17 @@ export const templatePrompts = {
     - Remove any dot jots from the input data.
     - If user text input includes "%" make sure to put a forward slash in front \%
     - Ensure the exact string: "ProjectArea" is not generated
+    - CONVERT ALL DATES INTO THIS EXACT FORMAT: MONTH YEAR (IF THE THE MONTH AND YEAR OF THE END DATE IS THE CURRENT MONTH AND YEAR IN REAL TIME REPLACE THE DATE WITH "Present" NO QUOTATIONS AS END DATE)
+    - Separate project and experience descriptions into clear bullet points, each highlighting a single task, responsibility, or achievement.
+    Capitalize the first letter of the following:
+      First and last names (e.g., "john doe" → "John Doe")
+      Locations and place names (e.g., "waterloo, ontario")
+      Dates and months (e.g., "january 2024")
+      Technologies and programming languages (e.g., "react, python")
+      Skills and tools (e.g., "data analysis, machine learning")
+      School names and degrees (e.g., "university of waterloo", "bachelor of science")
+      Job titles and company names (e.g., "software engineer", "google")
+      The first word of every bullet point or sentence
+
     `
 } as const;
