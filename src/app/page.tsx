@@ -51,7 +51,7 @@ export default function Home() {
               Generate Now
             </Link>
             <Link
-              href="https://github.com/yourusername/yourrepo"
+              href="https://github.com/justintimejt/CrackdResume"
               className="bg-transparent border border-white px-6 py-3 rounded-xl text-white hover:bg-white hover:text-black transition"
               target="_blank" rel="noopener noreferrer"
             >
@@ -146,7 +146,7 @@ export default function Home() {
       <footer className="text-white bg-black border-t border-gray-800 py-6 mt-10 px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="flex space-x-6 text-2xl">
-            <Link href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <Link href="https://github.com/justintimejt/CrackdResume" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
               <FaGithub className="hover:text-gray-400 transition" />
             </Link>
             <Link href="https://x.com/justinpchow?s=21" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">

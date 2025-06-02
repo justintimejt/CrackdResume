@@ -74,10 +74,10 @@ const TemplateSelector = ({ onSelect }: Props) => {
 
             {/*navigation Buttons*/}
             <div className="flex justify-between pt-6">
-                <button className="border text-white rounded-lg px-4 py-2 flex items-center gap-2 bg-gradient-to-r from-black to-black hover:from-blue-500 hover:to-cyan-500 hover:text-white transition transform hover:scale-105">
+                <a href="/" className="border text-white rounded-lg px-4 py-2 flex items-center gap-2 bg-gradient-to-r from-black to-black hover:from-blue-500 hover:to-cyan-500 hover:text-white transition transform hover:scale-105">
                     <FaArrowLeft />
                     Back to Home
-                </button>
+                </a>
 
                 <button
                     onClick={handleNext}
