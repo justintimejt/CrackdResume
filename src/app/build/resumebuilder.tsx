@@ -57,8 +57,8 @@ export default function ResumeBuilder() {
 
     } catch (err) {
       console.error("PDF compilation failed:", err);
-    } finally {
-      setLoading(false);
+    // } finally {
+    //   setLoading(false);
     }
 };
 
