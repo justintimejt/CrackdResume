@@ -4,9 +4,7 @@
 
 > Beta Version Live: [crackdresume.vercel.app](https://crackdresume.vercel.app/)
 
-Transform your resume content into polished, professional documents with AI. No more wrestling with LaTeX or formatting nightmares.
-
-![App Screenshot](assets/images/crackdresume.png)
+Transform your resume content into polished, professional documents with AI. No more wrestling with LaTeX or formatting issues.
 
 ## Features
 
