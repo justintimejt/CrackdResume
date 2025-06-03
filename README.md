@@ -6,6 +6,8 @@
 
 Transform your resume content into polished, professional documents with AI. No more wrestling with LaTeX or formatting nightmares.
 
+![App Screenshot](assets/images/crackdresume.png)
+
 ## Features
 
 - **AI-Powered Generation**: Leverages Gemini Flash 1.5 for intelligent resume compilation
